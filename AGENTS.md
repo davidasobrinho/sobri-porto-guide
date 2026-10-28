@@ -13,6 +13,8 @@ The project's context and decisions (the why) live in David's private Claude OS,
 | `site/data/neighbourhoods.geojson` | The coloured areas on the Neighbourhoods tab (OpenStreetMap boundaries). Rebuild with `scripts/neighbourhoods/build.js`; texts and colours stay in `places.json` |
 | `site/photos/<id>.jpg` | One or more photos per place, named after its `id`. About 1000px wide, landscape |
 | `docs/how-to-edit.md` | How to add a place, a photo, a rating, a section or a key date |
+| `site/_headers` | Tells browsers to always check for a fresh copy (photos are cached for a week). Keep it |
+| `site/places.js` | Not content. Old saved copies of the page load it, and it reloads them into the current page. Keep it |
 | `wrangler.jsonc` | Cloudflare Worker config. Everything in `site/` is published |
 | `scripts/publish.ps1` | Manual publish, only if automatic publishing is down |
 
