@@ -57,7 +57,6 @@ const asFeature = (g, id) => turf.feature(g, { id });
 
   // No official boundary for these: approximate areas around their centres (drawn dashed)
   const approx = (id, lng, lat, km) => turf.circle([lng, lat], km, { steps: 48, units: "kilometers", properties: { id, approx: true } });
-  out.push(approx("antas", -8.5885, 41.1610, 0.75));
   out.push(approx("boavista", -8.6330, 41.1580, 0.7));
 
   // Ribeira last, so it is drawn on top of the historic centre
@@ -68,7 +67,7 @@ const asFeature = (g, id) => turf.feature(g, { id });
   const round = c => Array.isArray(c[0]) ? c.map(round) : [Math.round(c[0] * 1e5) / 1e5, Math.round(c[1] * 1e5) / 1e5];
   for (const f of out) f.geometry.coordinates = round(f.geometry.coordinates);
 
-  const fc = { type: "FeatureCollection", attribution: "Boundaries © OpenStreetMap contributors (ODbL). Antas and Boavista are approximate.", features: out };
+  const fc = { type: "FeatureCollection", attribution: "Boundaries © OpenStreetMap contributors (ODbL). Boavista is approximate.", features: out };
   fs.writeFileSync(process.argv[2], JSON.stringify(fc));
   console.log(out.map(f => f.properties.id + ":" + f.geometry.type).join(" "), (fs.statSync(process.argv[2]).size / 1024).toFixed(0) + " KB");
 })();
