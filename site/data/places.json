@@ -67,6 +67,16 @@
         "streets": "Streets & walks",
         "beaches": "Beaches"
       }
+    },
+    "services": {
+      "label": "Parking & services",
+      "color": "#B79BD8",
+      "subs": {
+        "parking": "Parking",
+        "luggage": "Luggage storage",
+        "laundry": "Laundry",
+        "repairs": "Repairs"
+      }
     }
   },
   "dates": [
@@ -841,6 +851,93 @@
       "website": "https://wow.pt",
       "lat": 41.13474,
       "lng": -8.61435
+    },
+    {
+      "id": "parking-trindade",
+      "cat": "parking",
+      "name": "Trindade car park",
+      "tagline": "Covered parking, open 24 hours",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "The easiest place to leave a car near the house. A covered car park run by STCP, right at Trindade, open day and night, a short walk from the door. Street parking around Rua do Almada is scarce and paid, so this saves a lot of circling.",
+      "address": "Rua de Fernandes Tomás 936, Porto",
+      "phone": "+351 223 323 622",
+      "website": "https://www.stcpservicos.pt/estacionamento/parque-de-estacionamento-da-trindade",
+      "lat": 41.15072,
+      "lng": -8.60951
+    },
+    {
+      "id": "lockers-metro-trindade",
+      "cat": "luggage",
+      "name": "Trindade metro lockers",
+      "tagline": "Self-service lockers inside the station · 6:00 to 01:00",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "Arriving before check-in or leaving after check-out? These lockers are on level -1 of Trindade metro station, so you can drop your bags and go. Handy if you're catching the metro to the airport later: it leaves from the same station.",
+      "address": "Trindade metro station, level -1, Porto",
+      "phone": "+351 914 101 466",
+      "website": "https://www.citylockers.pt/",
+      "lat": 41.15214,
+      "lng": -8.60931
+    },
+    {
+      "id": "locker-in-the-city",
+      "cat": "luggage",
+      "name": "Locker in the City",
+      "tagline": "Luggage lockers open 24/7 · book online",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "A second option at Trindade, open around the clock. You book and pay online, then open the door and your locker with a code. Good backup when the metro lockers are full.",
+      "address": "Rua do Alferes Malheiro 175, Porto",
+      "phone": "+351 308 800 305",
+      "website": "https://lockerinthecity.com/en/lockers/portugal/porto/trindade-aliados/",
+      "lat": 41.15244,
+      "lng": -8.61117
+    },
+    {
+      "id": "luggage-storage-almada",
+      "cat": "luggage",
+      "name": "Luggage Storage Port",
+      "tagline": "Staffed luggage storage on our street",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "The closest place to leave your bags: a couple of minutes up Rua do Almada from the house. Someone looks after them in person.",
+      "address": "Rua do Almada 476, Porto",
+      "phone": "+351 933 626 755",
+      "lat": 41.15139,
+      "lng": -8.61198
+    },
+    {
+      "id": "lavandaria-almada",
+      "cat": "laundry",
+      "name": "Lavandaria do Almada",
+      "tagline": "Self-service laundry, a minute from the house",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "Bright, clean and practical, right on our street. Washers and dryers are self-service and the detergent is included in the price, so you don't need to bring anything.",
+      "address": "Rua do Almada 391, Porto",
+      "phone": "",
+      "lat": 41.15051,
+      "lng": -8.61213
+    },
+    {
+      "id": "clinica-calcado",
+      "cat": "repairs",
+      "name": "Clínica do Calçado",
+      "tagline": "Shoe and bag repairs",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "A broken heel, a sole coming loose, a strap or zip on your bag: this is the cobbler we trust. A small traditional workshop near Rua do Paraíso.",
+      "address": "Rua do Paraíso 252, Porto",
+      "phone": "+351 934 205 797",
+      "lat": 41.15731,
+      "lng": -8.61015
     }
   ],
   "moreIdeas": [
