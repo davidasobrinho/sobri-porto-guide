@@ -188,12 +188,16 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .welcome h2 { font-size: 32px; font-weight: 800; letter-spacing: -.025em; line-height: 1.02; }
 .welcome p { max-width: 62ch; margin: 12px 0 0; color: var(--text-2); }
 .rule { width: 48px; height: 2px; margin: 24px 0 0; border: 0; border-radius: 2px; background: var(--line-strong); }
-.welcome .group-h { margin-top: 30px; }
-.welcome .how { margin-top: 4px; border-top: 0; }
-.site-foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line-strong); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
-.sf-brand { font: 800 18px var(--font-display); letter-spacing: -.01em; }
-.sf-brand span { font: 500 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-left: 6px; }
-.sf-links { display: flex; gap: 18px; }
+.welcome .sec-h { margin: 34px 0 10px; font-size: 21px; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
+.welcome .how { margin-top: 0; }
+.welcome .how div { color: var(--text-2); grid-template-columns: 56px 1fr; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+.tile { display: block; padding: 13px 15px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); color: var(--fg); text-decoration: none; transition: border-color .15s, background .15s; }
+.tile:hover { border-color: var(--selected); background: var(--surface-2); }
+.tile b { display: block; font-size: 15.5px; font-weight: 600; }
+.tile span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; line-height: 1.35; }
+.site-foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line-strong); display: flex; justify-content: center; }
+.sf-links { display: flex; gap: 24px; }
 .sf-links a { font: 500 12px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
 .sf-links a:hover { color: var(--fg); }
 .how { margin-top: 30px; display: grid; gap: 0; border-top: 1px solid var(--line); }
@@ -501,24 +505,24 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
       G.welcome.map(t => "<p>" + esc(t) + "</p>").join("") +
       '<hr class="rule">' +
       // How to use this guide
-      '<div class="group-h">How to use this guide</div><div class="how">' +
-      '<div><span class="k">TAP</span><span><b>Tap a pin or a place</b> to read why we like it, see photos and find the address.</span></div>' +
-      '<div><span class="k">FILTER</span><span><b>Filter</b> by what you feel like: bars and restaurants, shops, culture, the outdoors.</span></div>' +
-      '<div><span class="k">SORT</span><span><b>Nearest first</b> puts the closest places to the house at the top.</span></div>' +
-      '<div><span class="k">GO</span><span><b>Get directions</b> opens Google Maps walking from wherever you are.</span></div>' +
-      '<div><span class="k">TIME</span><span><b>Walking times</b> are estimated from the Cork House at an easy pace, allowing for the turns of real streets. Porto is hilly, so uphill takes a little longer. Opening hours change, so check before you go.</span></div>' +
+      '<h3 class="sec-h">How to use this guide</h3><div class="how">' +
+      '<div><span class="k">TAP</span><span>Tap a pin or a place to read why we like it, see photos and find the address.</span></div>' +
+      '<div><span class="k">FILTER</span><span>Filter by what you feel like: bars and restaurants, shops, culture, the outdoors.</span></div>' +
+      '<div><span class="k">SORT</span><span>Nearest first puts the closest places to the house at the top.</span></div>' +
+      '<div><span class="k">GO</span><span>Get directions opens Google Maps walking from wherever you are.</span></div>' +
+      '<div><span class="k">TIME</span><span>Walking times are estimated from the Cork House at an easy pace, allowing for the turns of real streets. Porto is hilly, so uphill takes a little longer. Opening hours change, so check before you go.</span></div>' +
       "</div>" +
-      // The other tabs
-      '<div class="ideas"><div class="group-h">Explore the guide</div><ul>' +
-      '<li><a href="#" data-goto="places">Places<span>' + places.filter(p => tabOf(p) === "places").length + " places to eat, drink, shop and see →</span></a></li>" +
-      '<li><a href="#neighbourhoods" data-goto="hoods">Neighbourhoods<span>Porto\'s areas at a glance →</span></a></li>' +
-      '<li><a href="#services" data-goto="services">Services<span>Parking, luggage, laundry, repairs →</span></a></li>' +
-      "</ul></div>" +
+      // The other tabs, as buttons
+      '<h3 class="sec-h">Explore the guide</h3><div class="tiles">' +
+      '<a class="tile" href="#" data-goto="places"><b>Places</b><span>' + places.filter(p => tabOf(p) === "places").length + " places to eat, drink, shop and see</span></a>" +
+      '<a class="tile" href="#neighbourhoods" data-goto="hoods"><b>Neighbourhoods</b><span>Porto\'s areas at a glance</span></a>' +
+      '<a class="tile" href="#services" data-goto="services"><b>Services</b><span>Parking, luggage, laundry, repairs</span></a>' +
+      "</div>" +
       // What's on
-      (G.whatsOn && G.whatsOn.length ? '<div class="ideas"><div class="group-h">See what\'s happening</div><ul>' +
-        G.whatsOn.map(i => '<li><a href="' + esc(i.url) + '" target="_blank" rel="noopener">' + esc(i.label) + "<span>" + esc(i.note) + " ↗</span></a></li>").join("") + "</ul></div>" : "") +
-      // Footer, like a website
-      '<footer class="site-foot"><div class="sf-brand">SOBRI <span>Cork House · Porto</span></div><div class="sf-links">' +
+      (G.whatsOn && G.whatsOn.length ? '<h3 class="sec-h">See what\'s happening</h3><div class="tiles">' +
+        G.whatsOn.map(i => '<a class="tile" href="' + esc(i.url) + '" target="_blank" rel="noopener"><b>' + esc(i.label) + "</b><span>" + esc(i.note) + "</span></a>").join("") + "</div>" : "") +
+      // Footer: just the links
+      '<footer class="site-foot"><div class="sf-links">' +
       G.links.map(l => '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a>").join("") +
       "</div></footer></div>";
     view.querySelectorAll("[data-goto]").forEach(a => a.onclick = e => { e.preventDefault(); setTab(a.dataset.goto); });
