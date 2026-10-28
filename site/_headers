@@ -1,0 +1,6 @@
+# Always check for a fresh copy, so guests see updates right away.
+# (Cloudflare reads this file; it is not served as a page.)
+/*
+  Cache-Control: no-cache
+/photos/*
+  Cache-Control: public, max-age=604800
