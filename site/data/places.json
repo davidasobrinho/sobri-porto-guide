@@ -1089,7 +1089,15 @@
       "name": "Foz",
       "color": "#5CC1C9",
       "tagline": "Where the river meets the sea",
-      "intro": "The old fishing village turned seaside neighbourhood. Walk the promenade to the Felgueiras lighthouse, have a drink facing the Atlantic and stay for the sunset. Tram 1 runs there along the river from near the Ribeira."
+      "intro": "The seaside end of Porto, running up the coast to Matosinhos. Walk the promenade past the Felgueiras lighthouse and the beaches to the Castelo do Queijo, have a drink facing the Atlantic and stay for the sunset. Tram 1 runs there along the river from near the Ribeira."
+    },
+    {
+      "id": "fozvelha",
+      "name": "Foz Velha",
+      "color": "#E39AC2",
+      "approx": true,
+      "tagline": "The old village inside Foz",
+      "intro": "The original fishing village at the mouth of the Douro: narrow cobbled streets around the church of São João da Foz and the Passeio Alegre garden. Small restaurants, wine bars and old houses, a few steps from the sea."
     },
     {
       "id": "matosinhos",
@@ -1104,6 +1112,13 @@
       "color": "#F28B82",
       "tagline": "A fishing village across the river",
       "intro": "On the Gaia side, a small fishing community where laundry still dries in the streets and sardines grill at the doors. Cross the Douro on the little ferry from Cais do Ouro, near Foz, and stay for lunch at one of the fish restaurants."
+    },
+    {
+      "id": "canidelo",
+      "name": "Canidelo",
+      "color": "#6FA8DC",
+      "tagline": "Gaia beaches, facing Foz",
+      "intro": "Across the river in Gaia, just past Afurada. Sandy beaches like Lavadores, with rocky coves and a boardwalk along the coast, and sunset views back over Foz. Quieter than the Porto side."
     }
   ]
 }

@@ -8,7 +8,7 @@ An interactive Porto city guide for guests of the SOBRI Cork House. It replaces 
 
 - **List and Map views**, built for the phone. On mobile they switch, so neither one is cramped.
 - **Sections and sub-categories**: Bars & Restaurants (Portuguese, fish, snacks, world food, wine bars, to dance…), Retail, Culture (museums, galleries, Port wine cellars, key dates like São João) and Outdoors.
-- **Neighbourhoods**: a short guide to each area, coloured on the map from OpenStreetMap boundaries (Centro Histórico, Ribeira, Baixa, Cedofeita, Boavista, Bonfim, Campanhã, Foz, Matosinhos, Afurada).
+- **Neighbourhoods**: a short guide to each area, coloured on the map from OpenStreetMap boundaries (Centro Histórico, Ribeira, Baixa, Cedofeita, Boavista, Bonfim, Campanhã, Foz, Foz Velha, Matosinhos, Afurada, Canidelo).
 - **Services**: parking, luggage lockers, laundry and repairs near the house.
 - **Walking distance from the house** on every place, and "nearest first" sorting.
 - **Our own voice**: why we like each place, with practical details (address, phone, website).

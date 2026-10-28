@@ -46,8 +46,16 @@ const asFeature = (g, id) => turf.feature(g, { id });
   const camp = await search("Campanhã, Porto", "boundary", "administrative");
   out.push(asFeature(camp.geojson, "campanha"));
 
+  // Foz runs up the coast to Matosinhos: Foz do Douro + Nevogilde merged
   const foz = await search("Foz do Douro, Porto", "boundary", "historic");
-  out.push(asFeature(foz.geojson, "foz"));
+  const nev = await lookup(["R5936094"]);
+  const fozAll = union(turf.featureCollection([asFeature(foz.geojson, "foz"), asFeature(nev[0].geojson, "foz")]));
+  fozAll.properties = { id: "foz" };
+  out.push(fozAll);
+
+  // Canidelo, in Gaia, west of Afurada
+  const can = await lookup(["R5991742"]);
+  out.push(asFeature(can[0].geojson, "canidelo"));
 
   // Matosinhos (the town's parish, not the whole municipality) and Afurada (São Pedro da Afurada, in Gaia)
   const mat = await lookup(["R5923922"]);
@@ -59,6 +67,11 @@ const asFeature = (g, id) => turf.feature(g, { id });
   const approx = (id, lng, lat, km) => turf.circle([lng, lat], km, { steps: 48, units: "kilometers", properties: { id, approx: true } });
   out.push(approx("boavista", -8.6330, 41.1580, 0.7));
 
+  // Foz Velha: the old village core, between the church and Rua da Senhora da Luz, trimmed to Foz (drawn on top of it)
+  const fv = turf.intersect(turf.featureCollection([approx("fozvelha", -8.6722, 41.1495, 0.38), asFeature(foz.geojson, "fozvelha")]));
+  fv.properties = { id: "fozvelha", approx: true };
+  out.push(fv);
+
   // Ribeira last, so it is drawn on top of the historic centre
   const rib = await lookup(["R19484850"]);
   out.push(asFeature(rib[0].geojson, "ribeira"));
@@ -67,7 +80,7 @@ const asFeature = (g, id) => turf.feature(g, { id });
   const round = c => Array.isArray(c[0]) ? c.map(round) : [Math.round(c[0] * 1e5) / 1e5, Math.round(c[1] * 1e5) / 1e5];
   for (const f of out) f.geometry.coordinates = round(f.geometry.coordinates);
 
-  const fc = { type: "FeatureCollection", attribution: "Boundaries © OpenStreetMap contributors (ODbL). Boavista is approximate.", features: out };
+  const fc = { type: "FeatureCollection", attribution: "Boundaries © OpenStreetMap contributors (ODbL). Boavista and Foz Velha are approximate.", features: out };
   fs.writeFileSync(process.argv[2], JSON.stringify(fc));
   console.log(out.map(f => f.properties.id + ":" + f.geometry.type).join(" "), (fs.statSync(process.argv[2]).size / 1024).toFixed(0) + " KB");
 })();
