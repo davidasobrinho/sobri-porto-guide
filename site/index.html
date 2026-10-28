@@ -57,8 +57,9 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .brand-top b { color: var(--cork); font-weight: 500; }
 .brand h1 { font-size: 46px; line-height: .95; font-weight: 800; letter-spacing: -.025em; margin: 18px 0 6px; }
 .brand h1 span { display: block; font-weight: 400; font-size: 20px; letter-spacing: -.01em; color: var(--muted); margin-top: 8px; }
-.tabs { display: flex; gap: 4px; margin-top: 18px; }
-.tab { border: 0; background: transparent; color: var(--muted); padding: 10px 2px 12px; margin-right: 18px; font-weight: 500; border-bottom: 2px solid transparent; }
+.tabs { display: flex; gap: 4px; margin-top: 18px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: none; border: 0; background: transparent; color: var(--muted); padding: 10px 2px 12px; margin-right: 18px; font-weight: 500; border-bottom: 2px solid transparent; }
 .tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--cork); }
 
 .scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
@@ -151,6 +152,21 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .ideas a span { color: var(--muted); font-size: 13.5px; text-align: right; }
 .foot { margin-top: 28px; font: 500 11px/1.6 var(--font-mono); letter-spacing: .03em; color: var(--muted); }
 
+/* Neighbourhoods */
+.hoods h2 { font-size: 32px; font-weight: 800; letter-spacing: -.025em; line-height: 1.02; }
+.hoods .lead { max-width: 62ch; margin: 12px 0 10px; color: #D9D4CC; }
+.hood { padding: 14px 8px; margin: 0 -8px; border-bottom: 1px solid var(--line); border-radius: 12px; transition: background .15s; }
+.hood.hl { background: var(--surface); }
+.hood-h { display: flex; gap: 12px; align-items: center; width: 100%; border: 0; background: none; padding: 0; text-align: left; }
+.hood .sw { flex: none; width: 14px; height: 40px; border-radius: 4px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(255,255,255,.15); }
+.hood h3 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
+.hood-h p { margin: 2px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.35; }
+.hood-t { margin: 8px 0 0 26px; max-width: 62ch; color: #D9D4CC; font-size: 14.5px; }
+.hood .btn { margin: 10px 0 0 26px; padding: 7px 13px; font-size: 13.5px; }
+.leaflet-tooltip.hood-label { background: none; border: 0; box-shadow: none; padding: 0; color: #F4F1EC; font: 700 12.5px var(--font-body); letter-spacing: .01em; text-shadow: 0 1px 2px rgba(0,0,0,.95), 0 0 8px rgba(0,0,0,.8); }
+.leaflet-tooltip.hood-label::before { display: none; }
+.peek .thumb.hood-sw { background: var(--c) var(--grain); }
+
 /* Map pins: coloured dots with a graphite ring */
 .pin { width: 16px; height: 16px; margin: 5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2.5px #161718, 0 0 0 3.5px rgba(237,233,227,.35), 0 2px 8px rgba(0,0,0,.5); transition: transform .15s; }
 .pin.active { transform: scale(1.6); box-shadow: 0 0 0 2.5px #161718, 0 0 0 4px var(--c), 0 4px 14px rgba(0,0,0,.6); }
@@ -187,6 +203,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   .brand h1 { font-size: 30px; margin: 0 0 2px; }
   .brand h1 span { font-size: 17px; display: inline; margin-left: 6px; }
   .tabs { margin-top: 10px; }
+  .tab { margin-right: 11px; font-size: 14px; }
+  .tab:last-child { margin-right: 0; }
   .pad { padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); }
   .brand-inner { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 }
@@ -221,6 +239,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
         <div class="tabs" role="tablist">
           <button class="tab" role="tab" id="tab-welcome" aria-selected="false">Welcome</button>
           <button class="tab" role="tab" id="tab-places" aria-selected="true">Places</button>
+          <button class="tab" role="tab" id="tab-hoods" aria-selected="false">Neighbourhoods</button>
+          <button class="tab" role="tab" id="tab-services" aria-selected="false">Services</button>
         </div>
       </div>
     </header>
@@ -238,7 +258,11 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 <script>
 (async function () {
   // All guide content lives in data/places.json
-  const G = await fetch("data/places.json", { cache: "no-cache" }).then(r => r.json());
+  // Neighbourhood outlines live in data/neighbourhoods.geojson (texts and colours are in places.json)
+  const [G, GEO] = await Promise.all([
+    fetch("data/places.json", { cache: "no-cache" }).then(r => r.json()),
+    fetch("data/neighbourhoods.geojson", { cache: "no-cache" }).then(r => r.json()).catch(() => null)
+  ]);
   // Sections (Bars & Restaurants, Retail, Culture, Outdoors) and their sub-categories
   const SECS = G.sections;
   const SUB = {};
@@ -250,6 +274,12 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   G.places.forEach(p => { if (!SUB[p.cat]) console.warn("Unknown category for", p.id, p.cat); });
   function subLabel(p) { return SUB[p.cat].label; }
   function secOf(p) { return SUB[p.cat].sec; }
+  // Tabs: Places holds every section except "services", which has its own tab
+  const TABS = ["welcome", "places", "hoods", "services"];
+  function tabOf(p) { return secOf(p) === "services" ? "services" : "places"; }
+  function selectTab(t) { TABS.forEach(x => document.getElementById("tab-" + x).setAttribute("aria-selected", x === t)); }
+  const HOODS = G.neighbourhoods || [];
+  const hoodById = Object.fromEntries(HOODS.map(h => [h.id, h]));
   const HOME = G.home;
   const view = document.getElementById("view");
   const scroller = document.getElementById("scroll");
@@ -262,7 +292,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   places.forEach((p, i) => { p.n = i + 1; p.km = distKm(HOME, p); });
   const byId = Object.fromEntries(places.map(p => [p.id, p]));
 
-  let state = { tab: "places", sec: "all", sub: "all", sort: "guide", open: null, peek: null };
+  let state = { tab: "places", sec: "all", sub: "all", sort: "guide", open: null, peek: null, hood: null };
+  let fitted = false; // true once the map has been zoomed to the centre for the first time
   try { const s = JSON.parse(localStorage.getItem("sobri-guide") || "{}"); if (s.sort) state.sort = s.sort; } catch (e) {}
 
   function save() { try { localStorage.setItem("sobri-guide", JSON.stringify({ sort: state.sort })); } catch (e) {} }
@@ -283,13 +314,14 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   function mapsLink(p) { return "https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=" + p.lat + "," + p.lng; }
   function color(p) { return SECS[secOf(p)].color; }
   function matches(p) {
+    if ((state.tab === "places" || state.tab === "services") && tabOf(p) !== state.tab) return false;
     if (state.sec !== "all" && secOf(p) !== state.sec) return false;
     if (state.sub !== "all" && state.sub !== "dates" && p.cat !== state.sub) return false;
     return true;
   }
 
   // ---------- Map ----------
-  const map = L.map("map", { zoomControl: false, attributionControl: true }).setView([HOME.lat, HOME.lng], 14);
+  const map = L.map("map", { zoomControl: false, attributionControl: true, zoomSnap: 0.25 }).setView([HOME.lat, HOME.lng], 14);
   L.control.zoom({ position: "topright" }).addTo(map);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
@@ -311,9 +343,40 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
     markers[p.id] = m;
   });
 
+  // Neighbourhood areas: coloured shapes, shown only on the Neighbourhoods tab
+  const hoodShapes = {};
+  const hoodStyle = (id, on) => {
+    const h = hoodById[id] || {};
+    return { color: h.color, weight: on ? 3 : 1.5, opacity: .95, fillColor: h.color, fillOpacity: on ? .42 : (state.hood ? .12 : .24), dashArray: h.approx ? "6 6" : null };
+  };
+  const hoodLayer = GEO ? L.geoJSON(GEO, {
+    style: f => hoodStyle(f.properties.id, false),
+    onEachFeature: (f, layer) => {
+      const h = hoodById[f.properties.id]; if (!h) return;
+      hoodShapes[h.id] = layer;
+      layer.bindTooltip(h.name, { permanent: true, direction: "center", className: "hood-label" });
+      layer.on("click", e => { L.DomEvent.stopPropagation(e); selectHood(h.id, { fromMap: true }); });
+    }
+  }) : null;
+  function showHoods(on) {
+    if (!hoodLayer) return;
+    if (on && !map.hasLayer(hoodLayer)) hoodLayer.addTo(map);
+    if (!on && map.hasLayer(hoodLayer)) map.removeLayer(hoodLayer);
+  }
+  function paintHoods() { Object.keys(hoodShapes).forEach(id => hoodShapes[id].setStyle(hoodStyle(id, id === state.hood))); }
+  function fitHoods() {
+    if (!hoodLayer) return;
+    map.invalidateSize(); const sz = map.getSize(); if (!sz.x || !sz.y) return;
+    // On phones Foz (far west) would make everything tiny, so frame the central areas; Foz is a tap away
+    let b = hoodLayer.getBounds();
+    if (isPhone()) { b = L.latLngBounds([]); Object.keys(hoodShapes).filter(id => id !== "foz").forEach(id => b.extend(hoodShapes[id].getBounds())); }
+    map.fitBounds(b.pad(0.04), { animate: true });
+  }
+
   function refreshPins() {
     places.forEach(p => {
       const el = markers[p.id].getElement(); if (!el) return;
+      el.style.display = state.tab === "hoods" ? "none" : "";
       const pin = el.querySelector(".pin");
       const mapMode = isPhone() && document.querySelector(".app").dataset.mode === "map";
       const on = mapMode ? state.peek === p.id : (state.open === p.id || state.peek === p.id);
@@ -332,11 +395,47 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 
   // ---------- Views ----------
   function setTab(t) {
-    state.tab = t;
-    document.getElementById("tab-welcome").setAttribute("aria-selected", t === "welcome");
-    document.getElementById("tab-places").setAttribute("aria-selected", t === "places");
-    if (t === "welcome") { state.open = null; renderWelcome(); } else if (state.open) renderDetail(byId[state.open]); else renderList();
+    const prev = state.tab;
+    state.tab = t; selectTab(t);
+    if (prev !== t) { state.sec = t === "services" ? "services" : "all"; state.sub = "all"; state.hood = null; hidePeek(); }
+    showHoods(t === "hoods");
+    if (t === "welcome") { state.open = null; renderWelcome(); }
+    else if (t === "hoods") { state.open = null; paintHoods(); renderHoods(); }
+    else if (state.open && tabOf(byId[state.open]) === t) renderDetail(byId[state.open]);
+    else { state.open = null; renderList(); }
     refreshPins();
+    if (!state.open) { try { history.replaceState(null, "", t === "places" ? location.pathname + location.search : "#" + (t === "hoods" ? "neighbourhoods" : t)); } catch (e) {} }
+    if (prev !== t && fitted) {
+      if (t === "hoods") fitHoods();
+      else if (t === "services") fitTo(places.filter(matches).concat([HOME]));
+      else if (t === "places" && (prev === "hoods" || prev === "services")) fitTo(places.filter(p => tabOf(p) === "places" && p.km < 2.5).concat([HOME]));
+    }
+  }
+
+  function renderHoods() {
+    view.innerHTML = '<div class="hoods"><h2>Neighbourhoods</h2><p class="lead">' + esc(G.neighbourhoodsIntro) + "</p>" +
+      HOODS.map(h => '<article class="hood' + (state.hood === h.id ? " hl" : "") + '" data-hood="' + h.id + '" style="--c:' + h.color + '">' +
+        '<button class="hood-h" data-hood-go="' + h.id + '"><span class="sw"></span><span><h3>' + esc(h.name) + "</h3><p>" + esc(h.tagline) + "</p></span></button>" +
+        '<p class="hood-t">' + esc(h.intro) + "</p>" +
+        '<button class="btn m-only" data-hood-map="' + h.id + '">Show on map</button></article>').join("") +
+      '<p class="foot">Areas follow Porto\'s parish boundaries from OpenStreetMap. Antas has no official boundary, so its outline (dashed) is approximate.</p></div>';
+    view.querySelectorAll("[data-hood-go]").forEach(b => b.onclick = () => selectHood(b.dataset.hoodGo));
+    view.querySelectorAll("[data-hood-map]").forEach(b => b.onclick = () => { setMode("map"); selectHood(b.dataset.hoodMap); });
+    view.querySelectorAll(".hood").forEach(a => {
+      a.onmouseenter = () => { if (!state.hood && hoodShapes[a.dataset.hood]) hoodShapes[a.dataset.hood].setStyle(hoodStyle(a.dataset.hood, true)); };
+      a.onmouseleave = () => { if (!state.hood) paintHoods(); };
+    });
+    scroller.scrollTop = 0;
+  }
+  function selectHood(id, opts) {
+    state.hood = id; paintHoods();
+    view.querySelectorAll(".hood").forEach(c => c.classList.toggle("hl", c.dataset.hood === id));
+    const l = hoodShapes[id];
+    if (l) { map.invalidateSize(); const sz = map.getSize(); if (sz.x && sz.y) map.flyToBounds(l.getBounds().pad(0.15), { duration: 0.5, maxZoom: 16 }); }
+    if (opts && opts.fromMap) {
+      if (isPhone()) showHoodPeek(hoodById[id]);
+      else { const c = view.querySelector('.hood[data-hood="' + id + '"]'); if (c) c.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+    }
   }
 
   function renderWelcome() {
@@ -344,7 +443,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
       '<div class="welcome"><h2>Welcome to Porto</h2>' +
       G.welcome.map(t => "<p>" + esc(t) + "</p>").join("") +
       '<div class="sign">' + esc(G.signoff) + "</div>" +
-      '<div class="actions"><button class="btn primary" id="go-places">See the ' + places.length + ' places</button>' +
+      '<div class="actions"><button class="btn primary" id="go-places">See the ' + places.filter(p => tabOf(p) === "places").length + ' places</button>' +
       G.links.map(l => '<a class="btn" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a>").join("") + "</div>" +
       '<div class="how">' +
       '<div><span class="k">TAP</span><span><b>Tap a pin or a place</b> to read why we like it and see photos.</span></div>' +
@@ -374,22 +473,24 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 
   function renderList() {
     const secCount = {}, subCount = {};
-    places.forEach(p => { secCount[secOf(p)] = (secCount[secOf(p)] || 0) + 1; subCount[p.cat] = (subCount[p.cat] || 0) + 1; });
+    const svc = state.tab === "services";
+    const inTab = places.filter(p => tabOf(p) === state.tab);
+    inTab.forEach(p => { secCount[secOf(p)] = (secCount[secOf(p)] || 0) + 1; subCount[p.cat] = (subCount[p.cat] || 0) + 1; });
     const chip = (attr, val, label, n, pressed, c) => '<button class="chip" ' + attr + '="' + val + '"' + (c ? ' style="--c:' + c + '"' : "") + ' aria-pressed="' + pressed + '">' +
       (c ? '<span class="dot"></span>' : "") + esc(label) + (n != null ? ' <span class="n">' + n + "</span>" : "") + "</button>";
 
     // Row 1: sections (hidden when empty)
-    const secChips = [chip("data-sec", "all", "All", places.length, state.sec === "all")]
-      .concat(Object.keys(SECS).filter(s => secCount[s] || (s === "culture" && DATES.length))
+    const secChips = svc ? [] : [chip("data-sec", "all", "All", inTab.length, state.sec === "all")]
+      .concat(Object.keys(SECS).filter(s => s !== "services" && (secCount[s] || (s === "culture" && DATES.length)))
         .map(s => chip("data-sec", s, SECS[s].label, secCount[s] || 0, state.sec === s, SECS[s].color)));
     // Row 2: sub-categories of the chosen section
     let subRow = "";
     if (state.sec !== "all") {
       const subs = Object.values(SUB).filter(s => s.sec === state.sec && subCount[s.id]);
-      const subChips = [chip("data-sub", "all", "All " + SECS[state.sec].label.toLowerCase(), null, state.sub === "all")]
+      const subChips = [chip("data-sub", "all", svc ? "All" : "All " + SECS[state.sec].label.toLowerCase(), svc ? inTab.length : null, state.sub === "all")]
         .concat(subs.map(s => chip("data-sub", s.id, s.label, subCount[s.id], state.sub === s.id)));
       if (state.sec === "culture" && DATES.length) subChips.push(chip("data-sub", "dates", "Key dates", DATES.length, state.sub === "dates"));
-      subRow = '<div class="filters sub" role="group" aria-label="Filter ' + esc(SECS[state.sec].label) + '">' + subChips.join("") + "</div>";
+      subRow = '<div class="filters' + (svc ? "" : " sub") + '" role="group" aria-label="Filter ' + esc(SECS[state.sec].label) + '">' + subChips.join("") + "</div>";
     }
 
     const list = filtered();
@@ -413,7 +514,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
       });
       if (state.sec === "culture" && state.sub === "all" && DATES.length) body += datesHTML();
     }
-    view.innerHTML = '<div class="filters" role="group" aria-label="Filter places">' + secChips.join("") + "</div>" + subRow +
+    view.innerHTML = (svc ? "" : '<div class="filters" role="group" aria-label="Filter places">' + secChips.join("") + "</div>") + subRow +
       (state.sub === "dates" ? "" : '<div class="sortrow"><span>' + (state.sort === "near" ? "Nearest to the Cork House first" : "In guide order") + '</span><button id="sort">' + (state.sort === "near" ? "Guide order" : "Nearest first") + "</button></div>") + body;
 
     view.querySelectorAll("[data-sec]").forEach(b => b.onclick = () => {
@@ -441,7 +542,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
       : (p.visited ? '<div class="stars"><small style="margin:0">Last visit ' + esc(p.visited) + "</small></div>" : "");
     view.innerHTML =
       '<div class="detail" style="--c:' + color(p) + '">' +
-      '<button class="back" id="back">← All places</button>' +
+      '<button class="back" id="back">← ' + (tabOf(p) === "services" ? "All services" : "All places") + "</button>" +
       (photos.length ? '<div class="cover"><button id="zoom" aria-label="View photo larger"><img id="cover-img" src="' + esc(photos[0]) + '" alt="' + esc(p.name) + '"></button></div>' : "") +
       (photos.length > 1 ? '<div class="gallery">' + photos.map((s, k) => '<button data-k="' + k + '" aria-current="' + (k === 0) + '"><img src="' + esc(s) + '" alt="Photo ' + (k + 1) + '" loading="lazy"></button>').join("") + "</div>" : "") +
       '<div class="d-cat"><span class="dot"></span>' + esc(SECS[secOf(p)].label) + " · " + esc(subLabel(p)) + "</div>" +
@@ -472,9 +573,9 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 
   function openPlace(id, opts) {
     const p = byId[id]; if (!p) return;
-    state.open = id; state.tab = "places";
-    document.getElementById("tab-welcome").setAttribute("aria-selected", "false");
-    document.getElementById("tab-places").setAttribute("aria-selected", "true");
+    const t = tabOf(p);
+    if (state.tab !== t) { state.sec = t === "services" ? "services" : "all"; state.sub = "all"; state.hood = null; }
+    state.open = id; state.tab = t; selectTab(t); showHoods(false);
     renderDetail(p); refreshPins();
     const z = Math.max(map.getZoom(), 15);
     map.flyTo([p.lat, p.lng], z, { duration: 0.5 });
@@ -510,7 +611,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
     document.getElementById("mode-map").setAttribute("aria-pressed", m === "map");
     if (m === "map") {
       setHeadHeight(); map.invalidateSize(); firstFit();
-      if (!setMode.shown && !state.peek) { setMode.shown = true; fitTo(places.filter(p => p.km < 1).concat([HOME])); }
+      if (state.tab === "hoods" && !state.hood) fitHoods();
+      if (!setMode.shown && !state.peek && state.tab === "places") { setMode.shown = true; fitTo(places.filter(p => tabOf(p) === "places" && p.km < 1).concat([HOME])); }
     }
     else hidePeek();
   }
@@ -529,6 +631,19 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
     map.flyTo([p.lat, p.lng], Math.max(map.getZoom(), 15), { duration: 0.4 });
   }
   function hidePeek() { peek.hidden = true; state.peek = null; refreshPins(); }
+  function showHoodPeek(h) {
+    peek.style.setProperty("--c", h.color);
+    peek.innerHTML = '<span class="thumb hood-sw"></span>' +
+      '<div style="min-width:0"><h3>' + esc(h.name) + "</h3><p>" + esc(h.tagline) + "</p>" +
+      '<div class="peek-actions"><button class="btn primary" id="peek-open">Read more</button></div></div>' +
+      '<button class="x" id="peek-x" aria-label="Close">×</button>';
+    peek.hidden = false;
+    document.getElementById("peek-open").onclick = () => {
+      hidePeek(); setMode("list");
+      const c = view.querySelector('.hood[data-hood="' + h.id + '"]'); if (c) c.scrollIntoView({ block: "center" });
+    };
+    document.getElementById("peek-x").onclick = hidePeek;
+  }
   document.getElementById("mode-list").onclick = () => setMode("list");
   document.getElementById("mode-map").onclick = () => setMode("map");
   map.on("click", () => { if (!peek.hidden) hidePeek(); });
@@ -538,6 +653,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 
   document.getElementById("tab-welcome").onclick = () => { setMode("list"); setTab("welcome"); };
   document.getElementById("tab-places").onclick = () => { setMode("list"); state.open = null; setTab("places"); };
+  document.getElementById("tab-hoods").onclick = () => { setMode("list"); setTab("hoods"); };
+  document.getElementById("tab-services").onclick = () => { setMode("list"); state.open = null; setTab("services"); };
 
   // ---------- Cork grain on the header ----------
   function grain() {
@@ -558,17 +675,20 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   // ---------- Start ----------
   const start = location.hash.slice(1);
   if (start === "welcome") setTab("welcome");
+  else if (start === "neighbourhoods") setTab("hoods");
+  else if (start === "services") setTab("services");
   else if (byId[start]) { renderList(); openPlace(start); }
   else { setTab("places"); }
   // Zoom to the centre once the map has a real size (it can be 0 while the page is still laying out)
-  let fitted = false;
   function firstFit() {
     if (fitted) return;
     map.invalidateSize();
     const sz = map.getSize(); if (!sz.x || !sz.y) return;
     fitted = true;
     if (state.open) map.setView([byId[state.open].lat, byId[state.open].lng], 16);
-    else fitTo(places.filter(p => p.km < 2.5).concat([HOME]));
+    else if (state.tab === "hoods") setTimeout(fitHoods, 300); // let the layout settle first
+    else if (state.tab === "services") fitTo(places.filter(matches).concat([HOME]));
+    else fitTo(places.filter(p => tabOf(p) === "places" && p.km < 2.5).concat([HOME]));
     refreshPins();
   }
   if (window.ResizeObserver) new ResizeObserver(() => { map.invalidateSize(); firstFit(); }).observe(document.getElementById("map"));
@@ -579,6 +699,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
     const h = location.hash.slice(1);
     if (byId[h] && h !== state.open) openPlace(h);
     else if (h === "welcome") setTab("welcome");
+    else if (h === "neighbourhoods") setTab("hoods");
+    else if (h === "services") setTab("services");
   });
 })();
 </script>

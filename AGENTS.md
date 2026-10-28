@@ -10,6 +10,7 @@ The project's context and decisions (the why) live in David's private Claude OS,
 |---|---|
 | `site/index.html` | The whole app: layout, styles, map (Leaflet 1.9.4 with OpenStreetMap tiles) and logic. Rarely needs changes |
 | `site/data/places.json` | All content: welcome text, sections and sub-categories, key dates, the places, more ideas. Most edits happen here |
+| `site/data/neighbourhoods.geojson` | The coloured areas on the Neighbourhoods tab (OpenStreetMap boundaries). Rebuild with `scripts/neighbourhoods/build.js`; texts and colours stay in `places.json` |
 | `site/photos/<id>.jpg` | One or more photos per place, named after its `id`. About 1000px wide, landscape |
 | `docs/how-to-edit.md` | How to add a place, a photo, a rating, a section or a key date |
 | `wrangler.jsonc` | Cloudflare Worker config. Everything in `site/` is published |

@@ -12,6 +12,12 @@ On the place: `"rating": 5, "visited": "Oct 2026"`. `"rating": null` hides the s
 ## Sections and sub-categories
 Defined under `sections`: Bars & Restaurants, Retail, Culture, Outdoors. Each place's `cat` is a sub-category id, e.g. `"portuguese"`, `"vintage"`, `"galleries"`. Empty sections and sub-categories are hidden, so Retail appears as soon as it has a shop.
 
+## Tabs
+Welcome · Places · Neighbourhoods · Services. The `services` section (parking, luggage storage, laundry, repairs) shows in the Services tab; every other section shows in Places.
+
+## Neighbourhoods
+Texts and colours are under `neighbourhoods` in `places.json` (and the intro in `neighbourhoodsIntro`). The outlines on the map are in `site/data/neighbourhoods.geojson`, built from OpenStreetMap by `scripts/neighbourhoods/build.js`. To add an area, add its text in `places.json` and its outline in the script, then rebuild.
+
 ## Key dates
 Under `dates`. They show in Culture → Key dates.
 

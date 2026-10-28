@@ -971,5 +971,58 @@
       "note": "Art gallery",
       "url": "http://www.galeriafernandosantos.com/"
     }
+  ],
+  "neighbourhoodsIntro": "Porto is small, but every part of it has its own character. This is a quick guide to the areas you'll hear about, from the old centre around the house out to the sea. Tap one to see it on the map.",
+  "neighbourhoods": [
+    {
+      "id": "centro",
+      "name": "Centro Histórico",
+      "color": "#E58E5A",
+      "tagline": "The old city, a UNESCO World Heritage Site",
+      "intro": "Steep granite streets, churches covered in azulejos and the Sé cathedral on its hill. The heart of old Porto, listed by UNESCO since 1996, and where most of the landmarks are. Best explored on foot, slowly, with no fixed plan."
+    },
+    {
+      "id": "ribeira",
+      "name": "Ribeira",
+      "color": "#F0C75E",
+      "tagline": "The riverfront",
+      "intro": "Colourful houses stacked above the Douro, terraces along the quay and the Dom Luís I bridge overhead. Busy with visitors, but at sunset it's hard to beat. Walk across the bridge to Gaia for the classic view back and the Port wine cellars."
+    },
+    {
+      "id": "cedofeita",
+      "name": "Cedofeita",
+      "color": "#7FC4A0",
+      "tagline": "Creative Porto, a short walk from the house",
+      "intro": "Galleries, independent shops, vintage and design stores, and some of the city's best new places to eat. Rua de Miguel Bombarda is the art street and Rua de Cedofeita the old shopping street."
+    },
+    {
+      "id": "bonfim",
+      "name": "Bonfim",
+      "color": "#B79BD8",
+      "tagline": "Local, and on the rise",
+      "intro": "East of the centre, residential and still very local, with a new wave of cafés, restaurants and studios. Walk up to the Jardim de São Lázaro and the streets around Campo 24 de Agosto to see how Porto lives day to day."
+    },
+    {
+      "id": "antas",
+      "name": "Antas",
+      "color": "#6FA8DC",
+      "approx": true,
+      "tagline": "Football and wide avenues",
+      "intro": "Home of FC Porto and the Estádio do Dragão. A more modern part of the city, with wide avenues and parks. Worth the trip on match day or for a stadium tour."
+    },
+    {
+      "id": "campanha",
+      "name": "Campanhã",
+      "color": "#D46A8C",
+      "tagline": "The gateway, and a greener side of Porto",
+      "intro": "Where the trains from Lisbon arrive. Beyond the station, the Parque Oriental and old farm estates show a quieter, greener Porto that few visitors see."
+    },
+    {
+      "id": "foz",
+      "name": "Foz",
+      "color": "#5CC1C9",
+      "tagline": "Where the river meets the sea",
+      "intro": "The old fishing village turned seaside neighbourhood. Walk the promenade to the Felgueiras lighthouse, have a drink facing the Atlantic and stay for the sunset. Tram 1 runs there along the river from near the Ribeira."
+    }
   ]
 }
