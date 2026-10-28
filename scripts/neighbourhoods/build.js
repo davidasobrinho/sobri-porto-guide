@@ -53,9 +53,12 @@ const asFeature = (g, id) => turf.feature(g, { id });
   fozAll.properties = { id: "foz" };
   out.push(fozAll);
 
-  // Canidelo, in Gaia, west of Afurada
+  // Canidelo, in Gaia, west of Afurada: only its seaside strip (about 1 km in from the coast, Cabedelo to Lavadores)
   const can = await lookup(["R5991742"]);
-  out.push(asFeature(can[0].geojson, "canidelo"));
+  const coastStrip = turf.polygon([[[-8.70, 41.15], [-8.660, 41.15], [-8.652, 41.105], [-8.70, 41.105], [-8.70, 41.15]]]);
+  const canCoast = turf.intersect(turf.featureCollection([asFeature(can[0].geojson, "canidelo"), coastStrip]));
+  canCoast.properties = { id: "canidelo" };
+  out.push(canCoast);
 
   // Matosinhos (the town's parish, not the whole municipality) and Afurada (São Pedro da Afurada, in Gaia)
   const mat = await lookup(["R5923922"]);
