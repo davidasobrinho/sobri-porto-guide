@@ -45,9 +45,17 @@ const asFeature = (g, id) => turf.feature(g, { id });
   const foz = await search("Foz do Douro, Porto", "boundary", "historic");
   out.push(asFeature(foz.geojson, "foz"));
 
-  // Antas has no official boundary: an approximate area around its centre
-  const antas = turf.circle([-8.5885, 41.1610], 0.75, { steps: 48, units: "kilometers", properties: { id: "antas", approx: true } });
-  out.push(antas);
+  // Matosinhos (the town's parish, not the whole municipality) and Afurada (São Pedro da Afurada, in Gaia)
+  const mat = await lookup(["R5923922"]);
+  out.push(asFeature(mat[0].geojson, "matosinhos"));
+  const afu = await lookup(["R5991760"]);
+  out.push(asFeature(afu[0].geojson, "afurada"));
+
+  // No official boundary for these: approximate areas around their centres (drawn dashed)
+  const approx = (id, lng, lat, km) => turf.circle([lng, lat], km, { steps: 48, units: "kilometers", properties: { id, approx: true } });
+  out.push(approx("antas", -8.5885, 41.1610, 0.75));
+  out.push(approx("boavista", -8.6330, 41.1580, 0.7));
+  out.push(approx("trindade", -8.6093, 41.1518, 0.3));
 
   // Ribeira last, so it is drawn on top of the historic centre
   const rib = await lookup(["R19484850"]);

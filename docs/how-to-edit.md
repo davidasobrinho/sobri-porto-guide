@@ -15,6 +15,12 @@ Defined under `sections`: Bars & Restaurants, Retail, Culture, Outdoors. Each pl
 ## Tabs
 Welcome · Places · Neighbourhoods · Services. The `services` section (parking, luggage storage, laundry, repairs) shows in the Services tab; every other section shows in Places.
 
+## Welcome page
+The intro text is `welcome` in `places.json`. "See what's happening" is `whatsOn` (label, note, url). The footer links (sobri.pt, Instagram) are `links`. "How to use this guide" is written in `index.html`.
+
+## Light and dark
+Dark is the default. The button at the top right switches to light, and each visitor's choice is remembered on their phone. Both themes are colour tokens at the top of `index.html` (`:root` for dark, `:root[data-theme="light"]` for light).
+
 ## Neighbourhoods
 Texts and colours are under `neighbourhoods` in `places.json` (and the intro in `neighbourhoodsIntro`). The outlines on the map are in `site/data/neighbourhoods.geojson`, built from OpenStreetMap by `scripts/neighbourhoods/build.js`. To add an area, add its text in `places.json` and its outline in the script, then rebuild.
 

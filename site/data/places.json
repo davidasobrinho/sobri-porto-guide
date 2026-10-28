@@ -59,7 +59,8 @@
       "subs": {
         "fashion": "Fashion",
         "design": "Design",
-        "vintage": "Vintage & antiques"
+        "vintage": "Vintage & antiques",
+        "shops": "Food & wine shops"
       }
     },
     "culture": {
@@ -954,38 +955,81 @@
       "phone": "+351 934 205 797",
       "lat": 41.15731,
       "lng": -8.61015
-    }
-  ],
-  "moreIdeas": [
-    {
-      "label": "Rota do Chá",
-      "note": "Tea house with a garden",
-      "url": "https://www.rotadocha.pt/"
     },
     {
-      "label": "Centro Comercial Bombarda",
-      "note": "Small shops and designers",
-      "url": "https://www.ccbombarda.pt/"
+      "id": "cc-bombarda",
+      "cat": "design",
+      "name": "CC Bombarda",
+      "tagline": "A small arcade of independent shops and designers",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "A small shopping arcade on Rua de Miguel Bombarda, full of local designers. Small shops with clothes, ceramics, prints and plants, and a nice stop between galleries.",
+      "address": "Rua de Miguel Bombarda 285, Porto",
+      "phone": "+351 934 337 703",
+      "website": "https://www.ccbombarda.pt/",
+      "lat": 41.1496,
+      "lng": -8.62033
     },
     {
-      "label": "Copo d'Uva",
-      "note": "",
-      "url": "https://copoduva.com/"
+      "id": "copo-duva",
+      "cat": "shops",
+      "name": "Copo d'Uva",
+      "tagline": "Wine shop and delicatessen",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "A well-chosen selection of Portuguese wines and good things to eat. The place to pick a bottle to take home, with honest advice.",
+      "address": "Rua de Adolfo Casais Monteiro 101, Porto",
+      "phone": "+351 226 000 753",
+      "website": "https://copoduva.com/",
+      "lat": 41.14956,
+      "lng": -8.623
     },
     {
-      "label": "Ó Galeria",
-      "note": "Illustration gallery",
-      "url": "https://ogaleria.com/"
+      "id": "o-galeria",
+      "cat": "galleries",
+      "name": "Ó! Galeria",
+      "tagline": "Illustration and drawing",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "A gallery dedicated to illustration, with original drawings and prints by Portuguese and international artists. Affordable if you want to take some art home.",
+      "address": "Rua de Miguel Bombarda 61, Porto",
+      "phone": "+351 930 558 047",
+      "website": "https://ogaleria.com/",
+      "lat": 41.15004,
+      "lng": -8.61765
     },
     {
-      "label": "Tilsitt Gallery",
-      "note": "Art gallery",
-      "url": "https://tilsittgallery.com/"
+      "id": "tilsitt",
+      "cat": "galleries",
+      "name": "Tilsitt Gallery",
+      "tagline": "Contemporary art",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "A small contemporary art gallery on the art street, with changing exhibitions.",
+      "address": "Rua de Miguel Bombarda 171, Porto",
+      "phone": "+351 938 555 432",
+      "website": "https://tilsittgallery.com/",
+      "lat": 41.14984,
+      "lng": -8.61897
     },
     {
-      "label": "Galeria Fernando Santos",
-      "note": "Art gallery",
-      "url": "http://www.galeriafernandosantos.com/"
+      "id": "fernando-santos",
+      "cat": "galleries",
+      "name": "Galeria Fernando Santos",
+      "tagline": "One of Porto's leading contemporary galleries",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "Painting, sculpture and installations in a large white space. One of the references of the Bombarda art scene.",
+      "address": "Rua de Miguel Bombarda 526, Porto",
+      "phone": "+351 226 061 090",
+      "website": "http://www.galeriafernandosantos.com/",
+      "lat": 41.14941,
+      "lng": -8.62324
     }
   ],
   "neighbourhoodsIntro": "Porto is small, but every part of it has its own character. This is a quick guide to the areas you'll hear about, from the old centre around the house out to the sea. Tap one to see it on the map.",
@@ -1005,11 +1049,27 @@
       "intro": "Colourful houses stacked above the Douro, terraces along the quay and the Dom Luís I bridge overhead. Busy with visitors, but at sunset it's hard to beat. Walk across the bridge to Gaia for the classic view back and the Port wine cellars."
     },
     {
+      "id": "trindade",
+      "name": "Trindade",
+      "color": "#C9A37C",
+      "approx": true,
+      "tagline": "Our neighbourhood, the city's crossroads",
+      "intro": "Where the house is. Trindade is Porto's main metro hub, so the airport, the beach and the rest of the city are one ride away. Avenida dos Aliados and the City Hall are around the corner, with cafés, bars and restaurants on every street."
+    },
+    {
       "id": "cedofeita",
       "name": "Cedofeita",
       "color": "#7FC4A0",
       "tagline": "Creative Porto, a short walk from the house",
       "intro": "Galleries, independent shops, vintage and design stores, and some of the city's best new places to eat. Rua de Miguel Bombarda is the art street and Rua de Cedofeita the old shopping street."
+    },
+    {
+      "id": "boavista",
+      "name": "Boavista",
+      "color": "#A9B85C",
+      "approx": true,
+      "tagline": "Avenues, music and the road to the sea",
+      "intro": "Built around the Rotunda da Boavista and its long avenue to the ocean. Home to the Casa da Música, hotels and shopping centres. Follow the avenue west to reach Serralves and the Parque da Cidade."
     },
     {
       "id": "bonfim",
@@ -1039,6 +1099,20 @@
       "color": "#5CC1C9",
       "tagline": "Where the river meets the sea",
       "intro": "The old fishing village turned seaside neighbourhood. Walk the promenade to the Felgueiras lighthouse, have a drink facing the Atlantic and stay for the sunset. Tram 1 runs there along the river from near the Ribeira."
+    },
+    {
+      "id": "matosinhos",
+      "name": "Matosinhos",
+      "color": "#7E8CE0",
+      "tagline": "Beach town, and the best grilled fish",
+      "intro": "Just north of Porto, with a long sandy beach, surf schools and Rua Heróis de França, lined with grills cooking fresh fish and seafood. Take the blue metro line, or walk along the seafront from Foz."
+    },
+    {
+      "id": "afurada",
+      "name": "Afurada",
+      "color": "#F28B82",
+      "tagline": "A fishing village across the river",
+      "intro": "On the Gaia side, a small fishing community where laundry still dries in the streets and sardines grill at the doors. Cross the Douro on the little ferry from Cais do Ouro, near Foz, and stay for lunch at one of the fish restaurants."
     }
   ]
 }

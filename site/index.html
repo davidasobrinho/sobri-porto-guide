@@ -6,6 +6,7 @@
 <title>SOBRI Porto Guide</title>
 <meta name="description" content="Where to eat, drink and wander in Porto, picked by the SOBRI Cork House.">
 <meta name="theme-color" content="#161718">
+<script>/* Apply the saved light/dark choice before the page draws, so it never flashes */ try { if (localStorage.getItem("sobri-theme") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
@@ -27,6 +28,17 @@
   --selected: #6B6762;      /* warm grey for selected states: 5.0:1 with --on-selected, 3.2:1 against --bg */
   --on-selected: #F4F1EC;
   --placeholder: #24221F;
+  --text-2: #D9D4CC;        /* body copy */
+  --brand-bg: #1B1B1B;
+  --brand-fade: rgba(22,23,24,.85);
+  --ring: #161718;          /* ring around map pins */
+  --glass: rgba(30,32,34,.82);
+  --glass-strong: rgba(30,32,34,.92);
+  --attr-bg: rgba(22,23,24,.75);
+  --primary-hover: #D6B38E;
+  --label-fg: #F4F1EC;
+  --label-halo: 0 1px 2px rgba(0,0,0,.95), 0 0 8px rgba(0,0,0,.8);
+  --tiles: invert(1) hue-rotate(180deg) brightness(1.22) contrast(.72) saturate(.3) sepia(.12);
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "Geist", "Segoe UI", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
@@ -34,6 +46,34 @@
   --radius: 14px;
   --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .79  0 0 0 0 .64  0 0 0 0 .49  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #F4F0E9;
+  --surface: #EBE5DB;
+  --surface-2: #E2DACD;
+  --line: rgba(40, 34, 28, .10);
+  --line-strong: rgba(40, 34, 28, .20);
+  --fg: #1F1C18;
+  --muted: #645E55;
+  --cork: #8A5A34;
+  --cork-soft: rgba(138, 90, 52, .12);
+  --on-cork: #FFF8F0;
+  --selected: #3B3732;
+  --on-selected: #F4F0E9;
+  --placeholder: #E2DACD;
+  --text-2: #3A362F;
+  --brand-bg: #E9E2D6;
+  --brand-fade: rgba(244,240,233,.85);
+  --ring: #FFFFFF;
+  --glass: rgba(244,240,233,.86);
+  --glass-strong: rgba(244,240,233,.95);
+  --attr-bg: rgba(244,240,233,.8);
+  --primary-hover: #9C6A41;
+  --label-fg: #1F1C18;
+  --label-halo: 0 0 3px rgba(255,255,255,.95), 0 0 8px rgba(255,255,255,.85);
+  --tiles: saturate(.55) sepia(.1) contrast(.94) brightness(1.02);
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -51,14 +91,20 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 #map { height: 100%; background: var(--surface); }
 
 /* Header: graphite with cork grain drawn on canvas */
-.brand { position: relative; color: var(--fg); background: #1B1B1B; overflow: hidden; flex: none; border-bottom: 1px solid var(--line); }
+.brand { position: relative; color: var(--fg); background: var(--brand-bg); overflow: hidden; flex: none; border-bottom: 1px solid var(--line); }
 .brand canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.brand::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(22,23,24,0) 30%, rgba(22,23,24,.85) 100%); pointer-events: none; }
+.brand::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, var(--brand-fade) 100%); pointer-events: none; }
 .brand-inner { position: relative; z-index: 1; padding: 20px max(20px, env(safe-area-inset-right, 0px)) 0 max(20px, env(safe-area-inset-left, 0px)); }
 .brand-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font: 500 11px/1.4 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .brand-top b { color: var(--cork); font-weight: 500; }
 .brand h1 { font-size: 46px; line-height: .95; font-weight: 800; letter-spacing: -.025em; margin: 18px 0 6px; }
 .brand h1 span { display: block; font-weight: 400; font-size: 20px; letter-spacing: -.01em; color: var(--muted); margin-top: 8px; }
+.theme-btn { position: absolute; z-index: 2; top: 56px; right: max(20px, env(safe-area-inset-right, 0px)); width: 38px; height: 38px; padding: 0; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--glass); color: var(--fg); display: grid; place-items: center; transition: border-color .15s; }
+.theme-btn:hover { border-color: var(--muted); }
+.theme-btn svg { width: 18px; height: 18px; }
+.theme-btn .i-moon { display: none; }
+:root[data-theme="light"] .theme-btn .i-sun { display: none; }
+:root[data-theme="light"] .theme-btn .i-moon { display: block; }
 .tabs { display: flex; gap: 4px; margin-top: 18px; overflow-x: auto; scrollbar-width: none; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab { flex: none; border: 0; background: transparent; color: var(--muted); padding: 10px 2px 12px; margin-right: 18px; font-weight: 500; border-bottom: 2px solid transparent; }
@@ -82,7 +128,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .date { padding: 14px 0; border-bottom: 1px solid var(--line); }
 .date-d { font: 500 11px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--cork); }
 .date h3 { font-size: 20px; font-weight: 700; margin-top: 4px; letter-spacing: -.01em; }
-.date p { margin: 4px 0 0; color: #D9D4CC; max-width: 62ch; }
+.date p { margin: 4px 0 0; color: var(--text-2); max-width: 62ch; }
 .sortrow { display: flex; justify-content: space-between; align-items: center; margin: 16px 0 4px; font: 500 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .sortrow button { border: 0; background: none; color: var(--cork); padding: 4px 0; font: inherit; letter-spacing: inherit; text-transform: inherit; }
 
@@ -122,7 +168,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .stars small { letter-spacing: .04em; color: var(--muted); font: 500 11px var(--font-mono); text-transform: uppercase; margin-left: 6px; }
 .review { margin-top: 20px; }
 .review-h { font: 500 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--cork); margin-bottom: 6px; }
-.review p { margin: 0 0 12px; max-width: 62ch; color: #D9D4CC; }
+.review p { margin: 0 0 12px; max-width: 62ch; color: var(--text-2); }
 .facts { display: grid; gap: 0; margin: 20px 0 0; border-top: 1px solid var(--line); font-size: 14px; }
 .facts div { display: grid; grid-template-columns: 96px 1fr; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
 .facts dt { color: var(--muted); font: 500 11px/1.9 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
@@ -132,7 +178,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; text-decoration: none; font-weight: 500; font-size: 14px; border: 1px solid var(--line-strong); background: transparent; color: var(--fg); transition: border-color .15s, background .15s; }
 .btn:hover { border-color: var(--muted); }
 .btn.primary { background: var(--cork); color: var(--on-cork); border-color: var(--cork); font-weight: 600; }
-.btn.primary:hover { background: #D6B38E; }
+.btn.primary:hover { background: var(--primary-hover); }
 .nav-row { display: flex; justify-content: space-between; gap: 8px; margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); }
 .nav-row button { border: 0; background: none; color: var(--muted); font: 500 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 0; text-align: left; }
 .nav-row button:last-child { text-align: right; }
@@ -140,10 +186,16 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 
 /* Welcome */
 .welcome h2 { font-size: 32px; font-weight: 800; letter-spacing: -.025em; line-height: 1.02; }
-.welcome p { max-width: 62ch; margin: 12px 0 0; color: #D9D4CC; }
+.welcome p { max-width: 62ch; margin: 12px 0 0; color: var(--text-2); }
 .rule { width: 48px; height: 2px; margin: 24px 0 0; border: 0; border-radius: 2px; background: var(--line-strong); }
-.welcome .actions { margin-top: 20px; }
-.whats-on { margin-top: 30px; }
+.welcome .group-h { margin-top: 30px; }
+.welcome .how { margin-top: 4px; border-top: 0; }
+.site-foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line-strong); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.sf-brand { font: 800 18px var(--font-display); letter-spacing: -.01em; }
+.sf-brand span { font: 500 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-left: 6px; }
+.sf-links { display: flex; gap: 18px; }
+.sf-links a { font: 500 12px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.sf-links a:hover { color: var(--fg); }
 .how { margin-top: 30px; display: grid; gap: 0; border-top: 1px solid var(--line); }
 .how div { display: grid; grid-template-columns: 34px 1fr; gap: 10px; color: var(--muted); font-size: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
 .how .k { font: 500 11px/1.9 var(--font-mono); color: var(--cork); }
@@ -157,31 +209,31 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 
 /* Neighbourhoods */
 .hoods h2 { font-size: 32px; font-weight: 800; letter-spacing: -.025em; line-height: 1.02; }
-.hoods .lead { max-width: 62ch; margin: 12px 0 10px; color: #D9D4CC; }
+.hoods .lead { max-width: 62ch; margin: 12px 0 10px; color: var(--text-2); }
 .hood { padding: 14px 8px; margin: 0 -8px; border-bottom: 1px solid var(--line); border-radius: 12px; transition: background .15s; }
 .hood.hl { background: var(--surface); }
 .hood-h { display: flex; gap: 12px; align-items: center; width: 100%; border: 0; background: none; padding: 0; text-align: left; }
 .hood .sw { flex: none; width: 14px; height: 40px; border-radius: 4px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(255,255,255,.15); }
 .hood h3 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
 .hood-h p { margin: 2px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.35; }
-.hood-t { margin: 8px 0 0 26px; max-width: 62ch; color: #D9D4CC; font-size: 14.5px; }
+.hood-t { margin: 8px 0 0 26px; max-width: 62ch; color: var(--text-2); font-size: 14.5px; }
 .hood .btn { margin: 10px 0 0 26px; padding: 7px 13px; font-size: 13.5px; }
-.leaflet-tooltip.hood-label { background: none; border: 0; box-shadow: none; padding: 0; color: #F4F1EC; font: 700 12.5px var(--font-body); letter-spacing: .01em; text-shadow: 0 1px 2px rgba(0,0,0,.95), 0 0 8px rgba(0,0,0,.8); }
+.leaflet-tooltip.hood-label { background: none; border: 0; box-shadow: none; padding: 0; color: var(--label-fg); font: 700 12.5px var(--font-body); letter-spacing: .01em; text-shadow: var(--label-halo); }
 .leaflet-tooltip.hood-label::before { display: none; }
 .peek .thumb.hood-sw { background: var(--c) var(--grain); }
 
 /* Map pins: coloured dots with a graphite ring */
-.pin { width: 16px; height: 16px; margin: 5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2.5px #161718, 0 0 0 3.5px rgba(237,233,227,.35), 0 2px 8px rgba(0,0,0,.5); transition: transform .15s; }
-.pin.active { transform: scale(1.6); box-shadow: 0 0 0 2.5px #161718, 0 0 0 4px var(--c), 0 4px 14px rgba(0,0,0,.6); }
+.pin { width: 16px; height: 16px; margin: 5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2.5px var(--ring), 0 0 0 3.5px rgba(237,233,227,.35), 0 2px 8px rgba(0,0,0,.5); transition: transform .15s; }
+.pin.active { transform: scale(1.6); box-shadow: 0 0 0 2.5px var(--ring), 0 0 0 4px var(--c), 0 4px 14px rgba(0,0,0,.6); }
 .pin.dim { opacity: .2; }
-.home-pin { width: 34px; height: 34px; border-radius: 10px; background: var(--cork); display: grid; place-items: center; box-shadow: 0 0 0 3px #161718, 0 4px 14px rgba(0,0,0,.55); }
+.home-pin { width: 34px; height: 34px; border-radius: 10px; background: var(--cork); display: grid; place-items: center; box-shadow: 0 0 0 3px var(--ring), 0 4px 14px rgba(0,0,0,.55); }
 .leaflet-container { font-family: var(--font-body); background: var(--surface); }
-#map .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(1.22) contrast(.72) saturate(.3) sepia(.12); }
+#map .leaflet-tile-pane { filter: var(--tiles); }
 .leaflet-tooltip.tt { font: 500 13px var(--font-body); border-radius: 8px; padding: 5px 9px; background: var(--surface-2); color: var(--fg); border: 1px solid var(--line-strong); box-shadow: 0 4px 14px rgba(0,0,0,.4); }
 .leaflet-tooltip-top.tt::before { border-top-color: var(--surface-2); }
 .leaflet-bar a, .leaflet-bar a:hover { background: var(--surface-2); color: var(--fg); border-bottom-color: var(--line); }
 .leaflet-bar { border: 1px solid var(--line-strong) !important; box-shadow: 0 4px 14px rgba(0,0,0,.4) !important; }
-.leaflet-container .leaflet-control-attribution { background: rgba(22,23,24,.75); color: var(--muted); font: 10px var(--font-mono); }
+.leaflet-container .leaflet-control-attribution { background: var(--attr-bg); color: var(--muted); font: 10px var(--font-mono); }
 .leaflet-control-attribution a { color: var(--muted); }
 
 /* Lightbox */
@@ -195,7 +247,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   .app { position: relative; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); height: 100%; }
   .brand-top { display: none; }
   .panel { grid-row: 1; grid-column: 1; border-right: 0; }
-  #map { position: absolute; left: 0; right: 0; bottom: 0; top: var(--head-h, 120px); z-index: 1; }
+  #map { position: absolute; left: 0; right: 0; bottom: 0; top: var(--head-h, 120px); height: auto; z-index: 1; }
   .app[data-mode="list"] #map { visibility: hidden; pointer-events: none; }
   .app[data-mode="map"] .scroll { visibility: hidden; }
   .modes { display: flex; }
@@ -206,6 +258,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   .brand h1 { font-size: 30px; margin: 0 0 2px; }
   .brand h1 span { font-size: 17px; display: inline; margin-left: 6px; }
   .tabs { margin-top: 10px; }
+  .theme-btn { top: 9px; right: max(14px, env(safe-area-inset-right, 0px)); width: 34px; height: 34px; }
   .tab { margin-right: 11px; font-size: 14px; }
   .tab:last-child { margin-right: 0; }
   .pad { padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); }
@@ -215,11 +268,11 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 
 /* List / Map switch and pin preview card (phones only) */
 .m-only { display: none; }
-.modes { display: none; position: fixed; z-index: 1500; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); padding: 4px; gap: 4px; border-radius: 999px; background: rgba(30,32,34,.82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--line-strong); box-shadow: 0 8px 28px rgba(0,0,0,.5); }
+.modes { display: none; position: fixed; z-index: 1500; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); padding: 4px; gap: 4px; border-radius: 999px; background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--line-strong); box-shadow: 0 8px 28px rgba(0,0,0,.5); }
 .modes button { display: inline-flex; align-items: center; gap: 7px; border: 0; background: transparent; color: var(--muted); padding: 10px 18px; border-radius: 999px; font-weight: 500; font-size: 14.5px; }
 .modes button[aria-pressed="true"] { background: var(--selected); color: var(--on-selected); font-weight: 600; }
 .modes svg { width: 17px; height: 17px; }
-.peek { position: absolute; z-index: 1200; left: 12px; right: 12px; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 12px; align-items: center; padding: 10px; border-radius: 16px; background: rgba(30,32,34,.92); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--line-strong); color: var(--fg); box-shadow: 0 10px 32px rgba(0,0,0,.55); transition: transform .2s ease, opacity .2s ease; }
+.peek { position: absolute; z-index: 1200; left: 12px; right: 12px; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 12px; align-items: center; padding: 10px; border-radius: 16px; background: var(--glass-strong); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--line-strong); color: var(--fg); box-shadow: 0 10px 32px rgba(0,0,0,.55); transition: transform .2s ease, opacity .2s ease; }
 .peek .thumb { width: 84px; height: 84px; }
 .peek h3 { font-size: 17px; font-weight: 600; line-height: 1.2; padding-right: 26px; }
 .peek p { margin: 2px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.35; }
@@ -238,7 +291,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
       <canvas id="grain" aria-hidden="true"></canvas>
       <div class="brand-inner">
         <div class="brand-top"><span>SOBRI Cork House</span><span id="year"></span></div>
-        <h1>Porto</h1>
+        <h1>Porto <span>by SOBRI</span></h1>
+        <button class="theme-btn" id="theme-btn" aria-label="Switch to light mode" title="Light / dark"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></svg></button>
         <div class="tabs" role="tablist">
           <button class="tab" role="tab" id="tab-welcome" aria-selected="false">Welcome</button>
           <button class="tab" role="tab" id="tab-places" aria-selected="true">Places</button>
@@ -370,9 +424,9 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   function fitHoods() {
     if (!hoodLayer) return;
     map.invalidateSize(); const sz = map.getSize(); if (!sz.x || !sz.y) return;
-    // On phones Foz (far west) would make everything tiny, so frame the central areas; Foz is a tap away
+    // On phones the seaside areas (far west) would make everything tiny, so frame the central ones; the rest are a tap away
     let b = hoodLayer.getBounds();
-    if (isPhone()) { b = L.latLngBounds([]); Object.keys(hoodShapes).filter(id => id !== "foz").forEach(id => b.extend(hoodShapes[id].getBounds())); }
+    if (isPhone()) { b = L.latLngBounds([]); Object.keys(hoodShapes).filter(id => !["foz", "matosinhos", "afurada"].includes(id)).forEach(id => b.extend(hoodShapes[id].getBounds())); }
     map.fitBounds(b.pad(0.04), { animate: true });
   }
 
@@ -421,7 +475,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
         '<button class="hood-h" data-hood-go="' + h.id + '"><span class="sw"></span><span><h3>' + esc(h.name) + "</h3><p>" + esc(h.tagline) + "</p></span></button>" +
         '<p class="hood-t">' + esc(h.intro) + "</p>" +
         '<button class="btn m-only" data-hood-map="' + h.id + '">Show on map</button></article>').join("") +
-      '<p class="foot">Areas follow Porto\'s parish boundaries from OpenStreetMap. Antas has no official boundary, so its outline (dashed) is approximate.</p></div>';
+      '<p class="foot">Areas follow parish boundaries from OpenStreetMap. Trindade, Boavista and Antas have no official boundary, so their dashed outlines are approximate.</p></div>';
     view.querySelectorAll("[data-hood-go]").forEach(b => b.onclick = () => selectHood(b.dataset.hoodGo));
     view.querySelectorAll("[data-hood-map]").forEach(b => b.onclick = () => { setMode("map"); selectHood(b.dataset.hoodMap); });
     view.querySelectorAll(".hood").forEach(a => {
@@ -446,23 +500,28 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
       '<div class="welcome"><h2>Welcome to Porto</h2>' +
       G.welcome.map(t => "<p>" + esc(t) + "</p>").join("") +
       '<hr class="rule">' +
-      '<div class="actions">' +
-      G.links.filter(l => l.label === "sobri.pt").map(l => '<a class="btn" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a>").join("") +
-      '<button class="btn primary" id="go-places">Places</button>' +
-      '<button class="btn" id="go-services">Services</button>' +
-      G.links.filter(l => l.label !== "sobri.pt").map(l => '<a class="btn" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a>").join("") + "</div>" +
-      (G.whatsOn && G.whatsOn.length ? '<div class="ideas whats-on"><div class="group-h">See what\'s happening</div><ul>' +
-        G.whatsOn.map(i => '<li><a href="' + esc(i.url) + '" target="_blank" rel="noopener">' + esc(i.label) + "<span>" + esc(i.note) + " ↗</span></a></li>").join("") + "</ul></div>" : "") +
-      '<div class="how">' +
-      '<div><span class="k">TAP</span><span><b>Tap a pin or a place</b> to read why we like it and see photos.</span></div>' +
-      '<div><span class="k">FILTER</span><span><b>Filter</b> by what you feel like: bars and restaurants, culture, the outdoors.</span></div>' +
+      // How to use this guide
+      '<div class="group-h">How to use this guide</div><div class="how">' +
+      '<div><span class="k">TAP</span><span><b>Tap a pin or a place</b> to read why we like it, see photos and find the address.</span></div>' +
+      '<div><span class="k">FILTER</span><span><b>Filter</b> by what you feel like: bars and restaurants, shops, culture, the outdoors.</span></div>' +
+      '<div><span class="k">SORT</span><span><b>Nearest first</b> puts the closest places to the house at the top.</span></div>' +
       '<div><span class="k">GO</span><span><b>Get directions</b> opens Google Maps walking from wherever you are.</span></div>' +
+      '<div><span class="k">TIME</span><span><b>Walking times</b> are estimated from the Cork House at an easy pace, allowing for the turns of real streets. Porto is hilly, so uphill takes a little longer. Opening hours change, so check before you go.</span></div>' +
       "</div>" +
-      (G.moreIdeas && G.moreIdeas.length ? '<div class="ideas"><div class="group-h">More ideas</div><ul>' +
-        G.moreIdeas.map(i => '<li><a href="' + esc(i.url) + '" target="_blank" rel="noopener">' + esc(i.label) + "<span>" + esc(i.note) + "</span></a></li>").join("") + "</ul></div>" : "") +
-      '<p class="foot">Times are walking estimates from the Cork House. Opening hours change, so check before you go.</p></div>';
-    document.getElementById("go-places").onclick = () => setTab("places");
-    document.getElementById("go-services").onclick = () => setTab("services");
+      // The other tabs
+      '<div class="ideas"><div class="group-h">Explore the guide</div><ul>' +
+      '<li><a href="#" data-goto="places">Places<span>' + places.filter(p => tabOf(p) === "places").length + " places to eat, drink, shop and see →</span></a></li>" +
+      '<li><a href="#neighbourhoods" data-goto="hoods">Neighbourhoods<span>Porto\'s areas at a glance →</span></a></li>' +
+      '<li><a href="#services" data-goto="services">Services<span>Parking, luggage, laundry, repairs →</span></a></li>' +
+      "</ul></div>" +
+      // What's on
+      (G.whatsOn && G.whatsOn.length ? '<div class="ideas"><div class="group-h">See what\'s happening</div><ul>' +
+        G.whatsOn.map(i => '<li><a href="' + esc(i.url) + '" target="_blank" rel="noopener">' + esc(i.label) + "<span>" + esc(i.note) + " ↗</span></a></li>").join("") + "</ul></div>" : "") +
+      // Footer, like a website
+      '<footer class="site-foot"><div class="sf-brand">SOBRI <span>Cork House · Porto</span></div><div class="sf-links">' +
+      G.links.map(l => '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a>").join("") +
+      "</div></footer></div>";
+    view.querySelectorAll("[data-goto]").forEach(a => a.onclick = e => { e.preventDefault(); setTab(a.dataset.goto); });
     scroller.scrollTop = 0;
   }
 
@@ -670,16 +729,34 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
     const c = document.getElementById("grain"), r = c.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
     c.width = r.width * dpr; c.height = r.height * dpr;
     const x = c.getContext("2d"); x.scale(dpr, dpr);
+    const light = document.documentElement.dataset.theme === "light";
     let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
     // Cork grain: warm cork flecks and dark pores on graphite
     const n = Math.round(r.width * r.height / 22);
     for (let i = 0; i < n; i++) {
       const px = rnd() * r.width, py = rnd() * r.height, s = rnd();
-      x.fillStyle = s > 0.5 ? "rgba(201,163,124," + (0.08 + rnd() * 0.32) + ")" : "rgba(0,0,0," + (0.25 + rnd() * 0.45) + ")";
+      x.fillStyle = light
+        ? (s > 0.5 ? "rgba(160,112,70," + (0.10 + rnd() * 0.30) + ")" : "rgba(70,50,30," + (0.05 + rnd() * 0.16) + ")")
+        : (s > 0.5 ? "rgba(201,163,124," + (0.08 + rnd() * 0.32) + ")" : "rgba(0,0,0," + (0.25 + rnd() * 0.45) + ")");
       x.beginPath(); x.ellipse(px, py, 0.5 + rnd() * 2.2, 0.4 + rnd() * 1.4, rnd() * Math.PI, 0, Math.PI * 2); x.fill();
     }
   }
   grain(); window.addEventListener("resize", () => { grain(); });
+
+  // ---------- Light / dark ----------
+  const themeBtn = document.getElementById("theme-btn");
+  function applyTheme(t) {
+    if (t === "light") document.documentElement.dataset.theme = "light"; else delete document.documentElement.dataset.theme;
+    themeBtn.setAttribute("aria-label", t === "light" ? "Switch to dark mode" : "Switch to light mode");
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", t === "light" ? "#F4F0E9" : "#161718");
+    grain();
+  }
+  applyTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+  themeBtn.onclick = () => {
+    const t = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+    applyTheme(t);
+    try { localStorage.setItem("sobri-theme", t); } catch (e) {}
+  };
 
   // ---------- Start ----------
   const start = location.hash.slice(1);
