@@ -2,5 +2,6 @@
 # (Cloudflare reads this file; it is not served as a page.)
 /*
   Cache-Control: no-cache
+  Strict-Transport-Security: max-age=31536000
 /photos/*
   Cache-Control: public, max-age=604800
