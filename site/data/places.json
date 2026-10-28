@@ -1,0 +1,878 @@
+{
+  "updated": "2026",
+  "home": {
+    "name": "SOBRI Cork House",
+    "address": "Rua do Almada, Porto",
+    "lat": 41.14975,
+    "lng": -8.61215
+  },
+  "welcome": [
+    "The SOBRI Cork House is an extension of SOBRI, a Porto lifestyle brand built around cork, one of the most amazing natural raw materials. We see the house as a gallery, a showroom, or simply a comfortable place to spend a few days.",
+    "Everything in this space was chosen to feel natural and comfortable, combining cork with wood and steel. It is made in Portugal, and the whole atmosphere reflects what SOBRI stands for.",
+    "Feel free to explore our home, and enjoy. Below are the places we love in Porto. If you want to know something specific, just ask us."
+  ],
+  "signoff": "Cris & David",
+  "links": [
+    {
+      "label": "sobri.pt",
+      "url": "https://www.sobri.pt"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/sobri.porto/"
+    }
+  ],
+  "sections": {
+    "food": {
+      "label": "Bars & Restaurants",
+      "color": "#E4874F",
+      "subs": {
+        "portuguese": "Portuguese",
+        "fish": "Fish & seafood",
+        "snacks": "Snacks & sandwiches",
+        "world": "World food",
+        "healthy": "Healthy & veggie",
+        "wine": "Wine bars",
+        "bars": "Bars & rooftops",
+        "dance": "To dance"
+      }
+    },
+    "retail": {
+      "label": "Retail",
+      "color": "#D9BC5A",
+      "subs": {
+        "fashion": "Fashion",
+        "design": "Design",
+        "vintage": "Vintage & antiques"
+      }
+    },
+    "culture": {
+      "label": "Culture",
+      "color": "#8AA8D8",
+      "subs": {
+        "museums": "Museums",
+        "galleries": "Galleries",
+        "architecture": "Architecture",
+        "cellars": {
+          "label": "Port wine cellars",
+          "intro": "Visiting the Port wine cellars should be near the top of your list. There are 16 cellars in Vila Nova de Gaia, just across the river, and the tours are similar in all of them. These are the ones we suggest."
+        }
+      }
+    },
+    "outdoors": {
+      "label": "Outdoors",
+      "color": "#8DBF6A",
+      "subs": {
+        "gardens": "Gardens & parks",
+        "streets": "Streets & walks",
+        "beaches": "Beaches"
+      }
+    }
+  },
+  "dates": [
+    {
+      "date": "Night of 23 June",
+      "name": "São João",
+      "text": "Porto's biggest party. The whole city stays out all night: grilled sardines on every corner, pots of basil, plastic hammers, and fireworks over the Douro at midnight. If you're here, don't go to bed early."
+    }
+  ],
+  "places": [
+    {
+      "id": "brasao",
+      "cat": "snacks",
+      "name": "Cervejaria Brasão",
+      "tagline": "The best francesinha, from a wood-fired oven",
+      "photos": [
+        "photos/brasao.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "We start with the star of Porto's food, the famous francesinha. Many restaurants claim to make the best one. For us (and many others), the best comes from our neighbours at Brasão, a cosy, well-designed space that has mastered the recipe in a wood-fired oven.",
+      "address": "Rua Ramalho Ortigão 28, Porto",
+      "phone": "+351 934 158 672",
+      "lat": 41.14917,
+      "lng": -8.61178
+    },
+    {
+      "id": "casa-guedes",
+      "cat": "snacks",
+      "name": "Casa Guedes",
+      "tagline": "The most famous sandwich in town",
+      "photos": [
+        "photos/casa-guedes.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "A simple, inexpensive menu with one of Porto's stars: the roast pork sandwich with queijo da Serra, the soft cheese from the mountains. Mr. César opened it in 1987 and still brings his contagious good mood. There is always a queue, and it is always worth the wait. Have it with a beer.",
+      "address": "Praça dos Poveiros 130, Porto",
+      "phone": "+351 222 002 874",
+      "lat": 41.14599,
+      "lng": -8.60348
+    },
+    {
+      "id": "venham-mais-5",
+      "cat": "snacks",
+      "name": "Venham Mais 5",
+      "tagline": "Another sandwich you don't want to miss",
+      "photos": [
+        "photos/venham-mais-5.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "By now you may think Porto only offers bread, cheese and meat. Sorry, but Venham Mais 5 had to be on this list. Its famous sandwiches come with steak and queijo da Serra, and it is close to Casa Guedes, so you can try one in each place.",
+      "address": "Rua de Santo Ildefonso 219, Porto",
+      "phone": "+351 220 941 990",
+      "lat": 41.14668,
+      "lng": -8.60343
+    },
+    {
+      "id": "taberna-santo-antonio",
+      "cat": "portuguese",
+      "name": "Taberna de Santo António",
+      "tagline": "Typical Portuguese home cooking",
+      "photos": [
+        "photos/taberna-santo-antonio.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Small space, huge quality. Few places cook Portuguese food like this: Dona Hermínia makes the classic dishes as if our mother or grandmother made them. Try the rissóis too. You won't be disappointed.",
+      "address": "Rua das Virtudes 32, Porto",
+      "phone": "+351 222 055 306",
+      "lat": 41.14324,
+      "lng": -8.61796
+    },
+    {
+      "id": "pontual",
+      "cat": "snacks",
+      "name": "Pontual",
+      "tagline": "Just cross the street",
+      "photos": [
+        "photos/pontual.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Right in front of the Cork House. A simple snack bar with cheap, tasty food, perfect for a quick late meal and a taste of classic Porto service. Try the bôla, a sweet bread filled with Portuguese cured meats, made every day until 2am.",
+      "address": "Rua do Almada 350, Porto",
+      "phone": "+351 222 088 917",
+      "lat": 41.14969,
+      "lng": -8.61203
+    },
+    {
+      "id": "puro-4050",
+      "cat": "world",
+      "name": "Puro 4050",
+      "tagline": "Mozzarella bar in downtown Porto",
+      "photos": [
+        "photos/puro-4050.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "An original concept where mozzarella is the star, served in many forms with grilled vegetables, Italian cured meats and more.",
+      "address": "Largo de São Domingos 84, Porto",
+      "phone": "+351 222 011 852",
+      "lat": 41.14308,
+      "lng": -8.61461
+    },
+    {
+      "id": "shiko",
+      "cat": "world",
+      "name": "Shiko",
+      "tagline": "Japanese tavern",
+      "photos": [
+        "photos/shiko.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "The first Japanese place in Porto to offer more than sushi, created by chef Ruy Leão, a true expert in Japanese food. Small plates rule the menu. Try the okonomiyaki, a Japanese pancake with seafood and bacon.\n\nThe space is small and intimate, so book ahead.",
+      "address": "Rua do Sol 238, Porto",
+      "phone": "+351 223 239 671",
+      "lat": 41.14342,
+      "lng": -8.60773
+    },
+    {
+      "id": "lsd",
+      "cat": "world",
+      "name": "LSD",
+      "tagline": "Mediterranean and international cooking",
+      "photos": [
+        "photos/lsd.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "A modern space in Largo de São Domingos, in the heart of the city. Light meals at lunch, and contemporary, international cooking at dinner.",
+      "address": "Largo de São Domingos 78, Porto",
+      "phone": "+351 910 298 589",
+      "lat": 41.14295,
+      "lng": -8.6149
+    },
+    {
+      "id": "reitoria",
+      "cat": "portuguese",
+      "name": "Reitoria",
+      "tagline": "Wine bar and steak house",
+      "photos": [
+        "photos/reitoria.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "A wine bar and steak house in a beautifully restored 19th-century building, with a balcony lined with olive trees. The menu is short and built around different cuts of meat.",
+      "address": "Rua Sá de Noronha 33, Porto",
+      "phone": "+351 927 608 628",
+      "lat": 41.1476,
+      "lng": -8.61538
+    },
+    {
+      "id": "nola",
+      "cat": "healthy",
+      "name": "Nola Kitchen",
+      "tagline": "No labels food",
+      "photos": [
+        "photos/nola.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Right next to the Cork House. Tasty organic food with no processed ingredients, and a small market, all in a relaxed, minimalist space.",
+      "address": "Praça Dona Filipa de Lencastre 25, Porto",
+      "phone": "+351 910 595 015",
+      "lat": 41.14791,
+      "lng": -8.61251
+    },
+    {
+      "id": "boa-bao",
+      "cat": "world",
+      "name": "Boa Bao",
+      "tagline": "A trip to an Asian market",
+      "photos": [
+        "photos/boa-bao.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "The red neon at the door invites you into a place that makes you travel. Start with an exotic cocktail at the lobby bar, then sit down and imagine you're in an Asian market. Light pours in through the glass ceiling across several rooms, fed by two kitchens.",
+      "address": "Rua da Picaria 65, Porto",
+      "phone": "+351 910 043 030",
+      "lat": 41.14927,
+      "lng": -8.61306
+    },
+    {
+      "id": "cantinho-avillez",
+      "cat": "portuguese",
+      "name": "Cantinho do Avillez",
+      "tagline": "The Portuguese star",
+      "photos": [
+        "photos/cantinho-avillez.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "José Avillez is one of Portugal's most renowned chefs, with two Michelin stars. His first Porto restaurant is friendly, cosy and relaxed, with contemporary cooking inspired by Portuguese traditions.",
+      "address": "Rua Mouzinho da Silveira 166, Porto",
+      "phone": "+351 223 227 879",
+      "lat": 41.14318,
+      "lng": -8.61344
+    },
+    {
+      "id": "curb",
+      "cat": "snacks",
+      "name": "Curb",
+      "tagline": "The best burger in town",
+      "photos": [
+        "photos/curb.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "It may sound like an exaggeration, but Curb has the best burgers in Porto, maybe in the world. High-quality beef, bread baked in house every day, and only 120 burgers a day, so they sell out daily.",
+      "address": "Rua de Belomonte 70, Porto",
+      "phone": "",
+      "lat": 41.14264,
+      "lng": -8.6162
+    },
+    {
+      "id": "elemento",
+      "cat": "portuguese",
+      "name": "Elemento",
+      "tagline": "Cooking with fire",
+      "photos": [
+        "photos/elemento.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "The first fire-dining restaurant in Portugal. No gas, no electricity: oak, orange, apple and olive wood cook fresh, seasonal ingredients. Chef and owner Ricardo Dias Ferreira believes cooking is going back to its roots.",
+      "address": "Rua do Almada 51, Porto",
+      "phone": "+351 224 928 193",
+      "lat": 41.147,
+      "lng": -8.61222
+    },
+    {
+      "id": "carniceiro",
+      "cat": "portuguese",
+      "name": "O Carniceiro",
+      "tagline": "Stay cool",
+      "photos": [
+        "photos/carniceiro.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Inside the Zero Box Lodge, a red neon sign leads you down the corridor. The open kitchen, bar and library make it a box of surprises, with books picked by writer Gonçalo M. Tavares and colourful, smoking cocktails at the bar.\n\nThe meat of the day sits in a shop window: you choose, and they cook it in the open kitchen. It isn't a steakhouse, though. The menu is about sharing plates.",
+      "address": "Rua Ateneu Comercial do Porto 13, Porto",
+      "phone": "+351 961 555 162",
+      "lat": 41.14801,
+      "lng": -8.60746
+    },
+    {
+      "id": "lusitano",
+      "cat": "fish",
+      "name": "O Lusitano",
+      "tagline": "Grilled fish in Matosinhos",
+      "photos": [
+        "photos/lusitano.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Run by Rosa and Zé, next to the Matosinhos fish market, on a street with dozens of fish restaurants. This is exactly where we like to have fresh fish for lunch on a sunny Sunday.",
+      "address": "Rua Heróis de França 329, Matosinhos",
+      "phone": "+351 229 375 902",
+      "lat": 41.18308,
+      "lng": -8.6948
+    },
+    {
+      "id": "mistu",
+      "cat": "world",
+      "name": "Mistu",
+      "tagline": "Flavours from around the world",
+      "photos": [
+        "photos/mistu.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "It used to be a locksmith, then a bar, and now it takes you around the world's kitchens. Chef Rui Mingatos mixes Asia, South America and a Portuguese touch: white fish ceviche, oysters, sea bass with green asparagus, Uruguayan picanha with chimichurri. There is a signature cocktail bar too.",
+      "address": "Rua do Comércio do Porto 161, Porto",
+      "phone": "+351 926 682 620",
+      "lat": 41.14226,
+      "lng": -8.61618
+    },
+    {
+      "id": "manna",
+      "cat": "healthy",
+      "name": "Manna Porto",
+      "tagline": "Eat and meditate · breakfast and lunch",
+      "photos": [
+        "photos/manna.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "A peaceful place with local, organic, seasonal food. Breakfasts, snacks and light vegan and vegetarian meals, plus a bright room with large windows for yoga and meditation classes.",
+      "address": "Rua da Conceição 60, Porto",
+      "phone": "",
+      "lat": 41.15002,
+      "lng": -8.61402
+    },
+    {
+      "id": "dop",
+      "cat": "portuguese",
+      "name": "DOP",
+      "tagline": "Memory kitchen",
+      "photos": [
+        "photos/dop.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "One of the best restaurants in Porto. Chef Rui Paula reinvents traditional Portuguese cooking, à la carte or as a tasting menu. It won't leave you indifferent.",
+      "address": "Palácio das Artes, Largo de São Domingos 18, Porto",
+      "phone": "+351 222 014 313",
+      "lat": 41.14318,
+      "lng": -8.6146
+    },
+    {
+      "id": "virtudes",
+      "cat": "gardens",
+      "name": "Passeio das Virtudes",
+      "tagline": "Sunset over the Douro",
+      "photos": [
+        "photos/virtudes.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "A special place for SOBRI: many of the ideas in the brand's DNA were born here. Perfect for a late afternoon, watching the sunset over the Douro with a beer and a good conversation. You'll find all kinds of people, from jugglers to office workers, lots of dogs, and new friends.",
+      "address": "Passeio das Virtudes, Porto",
+      "phone": "",
+      "lat": 41.14394,
+      "lng": -8.61845
+    },
+    {
+      "id": "cristal",
+      "cat": "gardens",
+      "name": "Jardins do Palácio de Cristal",
+      "tagline": "Romantic gardens with a river view",
+      "photos": [
+        "photos/cristal.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Eight hectares of romantic gardens, designed in the 19th century by German landscape architect Émile David. The Crystal Palace itself is gone, but the gardens hold century-old Japanese trees, a fragrant rose garden and a viewpoint over the Douro.",
+      "address": "Rua de Dom Manuel II, Porto",
+      "phone": "",
+      "lat": 41.14703,
+      "lng": -8.62628
+    },
+    {
+      "id": "morro",
+      "cat": "gardens",
+      "name": "Jardim do Morro",
+      "tagline": "The view across the bridge",
+      "photos": [
+        "photos/morro.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "On the Gaia side of the river, next to the upper deck of the D. Luís I bridge. An amazing lookout over the historic centre, and at night the view of Porto is charming.",
+      "address": "Avenida da República, Vila Nova de Gaia",
+      "phone": "",
+      "lat": 41.13762,
+      "lng": -8.60869
+    },
+    {
+      "id": "botanico",
+      "cat": "gardens",
+      "name": "Jardim Botânico",
+      "tagline": "A biodiversity paradise",
+      "photos": [
+        "photos/botanico.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Dating back to 1837, Porto's botanical garden has rare and exotic plants, greenhouses, lakes and centuries-old trees across 4.4 hectares in Campo Alegre. There is a curious cactus and succulent garden, and old leafy trees that are perfect for a picnic.",
+      "address": "Rua do Campo Alegre 1191, Porto",
+      "phone": "",
+      "lat": 41.15289,
+      "lng": -8.64284
+    },
+    {
+      "id": "serralves",
+      "cat": "museums",
+      "name": "Fundação Serralves",
+      "tagline": "Art, architecture and nature",
+      "photos": [
+        "photos/serralves.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "A cultural institution with a contemporary vision of art and landscape. It has one of the largest and most beautiful gardens in Porto, with grazing animals, a contemporary art museum and the Serralves house, where exhibitions and concerts take place. Art installations often pop up in the gardens.",
+      "address": "Rua Dom João de Castro 210, Porto",
+      "phone": "",
+      "website": "https://www.serralves.pt",
+      "lat": 41.15904,
+      "lng": -8.65935
+    },
+    {
+      "id": "parque-cidade",
+      "cat": "gardens",
+      "name": "Parque da Cidade",
+      "tagline": "A park that reaches the ocean",
+      "photos": [
+        "photos/parque-cidade.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "The largest urban park in Portugal: 83 hectares running all the way to the Atlantic, which is rare anywhere in the world. Designed by Sidónio Pardal, with stone walls and paths that give it a countryside feel. Perfect for exploring on a sunny day.",
+      "address": "Estrada Interior da Circunvalação, Porto",
+      "phone": "",
+      "lat": 41.16936,
+      "lng": -8.67979
+    },
+    {
+      "id": "casa-musica",
+      "cat": "architecture",
+      "name": "Casa da Música",
+      "tagline": "Rem Koolhaas's concert hall",
+      "photos": [
+        "photos/casa-musica.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Built when Porto was European Capital of Culture in 2001, designed by Dutch architect Rem Koolhaas. Today it is an icon of contemporary architecture in Portugal. Check the programme and catch a concert if you can.",
+      "address": "Avenida da Boavista 604, Porto",
+      "phone": "",
+      "website": "https://www.casadamusica.com",
+      "lat": 41.1589,
+      "lng": -8.63077
+    },
+    {
+      "id": "leixoes",
+      "cat": "architecture",
+      "name": "Leixões Cruise Terminal",
+      "tagline": "Building of the Year 2017",
+      "photos": [
+        "photos/leixoes.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Designed by Luís Pedro Silva and opened in 2015, it won ArchDaily's Building of the Year 2017 for public architecture. From afar it makes you curious, and up close its white hexagonal tiles are overwhelming.",
+      "address": "Porto de Leixões, Matosinhos",
+      "phone": "",
+      "lat": 41.18729,
+      "lng": -8.69883
+    },
+    {
+      "id": "boa-nova",
+      "cat": "architecture",
+      "name": "Casa de Chá da Boa Nova",
+      "tagline": "Siza Vieira on the rocks",
+      "photos": [
+        "photos/boa-nova.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "One of Álvaro Siza Vieira's first projects (1958). As soon as you walk in, the windows open onto the horizon. Today it is a two-Michelin-star restaurant run by chef Rui Paula, but even if you don't eat here, the visit is worth it.",
+      "address": "Avenida da Liberdade 1681, Leça da Palmeira",
+      "phone": "",
+      "lat": 41.203,
+      "lng": -8.71511
+    },
+    {
+      "id": "almada",
+      "cat": "streets",
+      "name": "Rua do Almada",
+      "tagline": "Your street",
+      "photos": [
+        "photos/almada.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "The Cork House is on this street. It was the first street built outside the old city wall, in 1761, and the first in Porto with sidewalks. It was once known as the hardware street: not long ago more than 60 hardware shops were here.\n\nMany buildings were abandoned for years and are now being restored. That is how the SOBRI Cork House was born.",
+      "address": "Rua do Almada, Porto",
+      "phone": "",
+      "lat": 41.15123,
+      "lng": -8.61207
+    },
+    {
+      "id": "bombarda",
+      "cat": "galleries",
+      "name": "Miguel Bombarda",
+      "tagline": "Porto's art district",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "Known as the art district for its many galleries with free entry, on Rua Miguel Bombarda and the streets around it, like Rua do Rosário and Rua do Breyner. There are also concept stores, studios and ateliers. If you want unique design pieces and a taste of Porto's creative scene, this is a must.",
+      "address": "Rua de Miguel Bombarda, Porto",
+      "phone": "",
+      "lat": 41.14951,
+      "lng": -8.6219
+    },
+    {
+      "id": "bainharia",
+      "cat": "streets",
+      "name": "Bainharia, Mercadores, Aldas",
+      "tagline": "The oldest alleys",
+      "photos": [
+        "photos/bainharia.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Get lost in Porto's oldest alleys, where you can feel the soul of downtown. Narrow streets, mostly lived in by people born and raised here. A completely different reality from Rua Mouzinho da Silveira, just a few metres away.",
+      "address": "Rua da Bainharia, Porto",
+      "phone": "",
+      "lat": 41.14297,
+      "lng": -8.61335
+    },
+    {
+      "id": "rua-escura",
+      "cat": "streets",
+      "name": "Rua Escura",
+      "tagline": "The dark street",
+      "photos": [
+        "photos/rua-escura.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "One of the oldest streets in Porto, first recorded in 1301 as Rua Nova and renamed Rua Escura, the dark street, around 1404. Locals say the name comes from the tall medieval buildings that once blocked the sunlight.",
+      "address": "Rua Escura, Porto",
+      "phone": "",
+      "lat": 41.14333,
+      "lng": -8.61164
+    },
+    {
+      "id": "cedofeita",
+      "cat": "streets",
+      "name": "Rua de Cedofeita",
+      "tagline": "From the medieval port to the upper city",
+      "photos": [
+        "photos/cedofeita.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "An 840-metre street from Praça Carlos Alberto to Rua da Boavista that once linked the medieval river port to the upper city. Its name comes from the Church of São Martinho de Cedofeita, from the 6th century, and the Latin 'cito facta', meaning 'made early'. Many of its 18th and 19th-century buildings are protected.",
+      "address": "Rua de Cedofeita, Porto",
+      "phone": "",
+      "lat": 41.15338,
+      "lng": -8.61842
+    },
+    {
+      "id": "torrinha",
+      "cat": "streets",
+      "name": "Rua da Torrinha",
+      "tagline": "Antiques, vintage and sweets",
+      "photos": [
+        "photos/torrinha.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Antiques, furniture and home decor, vintage clothes and accessories. For a sweet tooth there are brigadeiros, brownies and cakes, and for something more filling, Afonso serves burgers and one of the best francesinhas in town.",
+      "address": "Rua da Torrinha, Porto",
+      "phone": "",
+      "lat": 41.15242,
+      "lng": -8.61935
+    },
+    {
+      "id": "foz-velha",
+      "cat": "streets",
+      "name": "Foz Velha",
+      "tagline": "Where the river meets the sea",
+      "photos": [
+        "photos/foz-velha.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Between the Douro and the sea, Foz Velha sometimes feels like a separate city. In the 19th century wealthy families built summer houses here, making it one of the city's noblest areas. Walk its narrow streets and centuries-old houses, and say good afternoon to the fishermen tending their boats.\n\nRenting a bike in Ribeira and riding along the river to Foz is a delight.",
+      "address": "Foz do Douro, Porto",
+      "phone": "",
+      "lat": 41.15085,
+      "lng": -8.66911
+    },
+    {
+      "id": "senhor-pedra",
+      "cat": "beaches",
+      "name": "Praia do Senhor da Pedra",
+      "tagline": "A chapel in the sea",
+      "photos": [
+        "photos/senhor-pedra.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "A 20-minute drive from Porto, Miramar beach has a chapel built on a rock in 1686. Locals say it's the only church with its back to the sea. We can't confirm that, but the scenery is incredible, especially at high tide, when the chapel sits in the middle of the water.",
+      "address": "Alameda do Senhor da Pedra, Gulpilhares",
+      "phone": "",
+      "lat": 41.06876,
+      "lng": -8.65873
+    },
+    {
+      "id": "graca",
+      "cat": "bars",
+      "name": "Graça Rooftop",
+      "tagline": "An almost secret rooftop",
+      "photos": [
+        "photos/graca.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "On the 4th floor of the Rivoli Cinema Hostel, relaxed and cosy, with sofas, plants and a view of the cathedral and Clérigos tower. On Sunday evenings there is bossa nova and Brazilian barbecue. A delight.",
+      "address": "Rua Dr. Magalhães Lemos 83, Porto",
+      "phone": "",
+      "lat": 41.14755,
+      "lng": -8.60987
+    },
+    {
+      "id": "aduela",
+      "cat": "wine",
+      "name": "Aduela",
+      "tagline": "A glass of wine that lasts all night",
+      "photos": [
+        "photos/aduela.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Next to the Carlos Alberto theatre, one of the favourite terraces of Porto's international crowd for a glass of wine at the end of the day, which often lasts into the night.",
+      "address": "Rua das Oliveiras 36, Porto",
+      "phone": "",
+      "lat": 41.14892,
+      "lng": -8.61505
+    },
+    {
+      "id": "catraio",
+      "cat": "bars",
+      "name": "Catraio",
+      "tagline": "Craft beer shop",
+      "photos": [
+        "photos/catraio.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "One of the first places to serve craft beer in Porto. New beers from around the world arrive every month.",
+      "address": "Rua de Cedofeita 256, Porto",
+      "phone": "",
+      "lat": 41.15111,
+      "lng": -8.6173
+    },
+    {
+      "id": "capela-incomum",
+      "cat": "wine",
+      "name": "Capela Incomum",
+      "tagline": "A wine bar in a chapel",
+      "photos": [
+        "photos/capela-incomum.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "A wine bar in a 19th-century chapel, altar included. In winter it feels like a living room, and in summer the terrace is where you want to be. A good selection of Portuguese wines and snacks at fair prices.",
+      "address": "Travessa do Carregal 77, Porto",
+      "phone": "",
+      "lat": 41.14905,
+      "lng": -8.61781
+    },
+    {
+      "id": "mompilher",
+      "cat": "bars",
+      "name": "Kiosk Mompilher",
+      "tagline": "Drinks at a 1900s kiosk",
+      "photos": [
+        "photos/mompilher.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "A wooden kiosk from the early 20th century at the top of Rua da Picaria, protected since 1996. It has no indoor space, so it opens only when the weather allows, with an airy terrace for a drink.",
+      "address": "Largo de Mompilher, Porto",
+      "phone": "",
+      "lat": 41.15008,
+      "lng": -8.61305
+    },
+    {
+      "id": "maus-habitos",
+      "cat": "dance",
+      "name": "Maus Hábitos",
+      "tagline": "Music, art and parties",
+      "photos": [
+        "photos/maus-habitos.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "On a 4th floor across from the Coliseu, mixing music, art, food, drinks and parties for a mixed crowd. The place for anything experimental: concerts, fado, cinema and gatherings.",
+      "address": "Rua de Passos Manuel 178, Porto",
+      "phone": "",
+      "website": "https://www.maushabitos.com",
+      "lat": 41.14667,
+      "lng": -8.60581
+    },
+    {
+      "id": "pipa-velha",
+      "cat": "bars",
+      "name": "Pipa Velha",
+      "tagline": "A Porto classic",
+      "photos": [
+        "photos/pipa-velha.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "One of Porto's most legendary bars, ideal for a beer, a glass of wine or a good whisky with Portuguese snacks.",
+      "address": "Rua das Oliveiras, Porto",
+      "phone": "",
+      "lat": 41.14977,
+      "lng": -8.6149
+    },
+    {
+      "id": "plano-b",
+      "cat": "dance",
+      "name": "Plano B",
+      "tagline": "Dance until 6am",
+      "photos": [
+        "photos/plano-b.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "Two floors: big sofas upstairs to sit and talk, and two dance floors downstairs. Theme parties, a varied crowd and music until 6am.",
+      "address": "Rua Cândido dos Reis 30, Porto",
+      "phone": "",
+      "lat": 41.14655,
+      "lng": -8.6139
+    },
+    {
+      "id": "gare",
+      "cat": "dance",
+      "name": "Gare",
+      "tagline": "Techno in a railway tunnel",
+      "photos": [
+        "photos/gare.jpg"
+      ],
+      "rating": null,
+      "visited": "",
+      "review": "An underground club in an old railway tunnel for techno lovers, with one of the best sound systems in the city and top national and international DJs every month.",
+      "address": "Rua da Madeira 182, Porto",
+      "phone": "",
+      "lat": 41.146,
+      "lng": -8.60959
+    },
+    {
+      "id": "calem",
+      "cat": "cellars",
+      "name": "Cálem",
+      "tagline": "A journey through Port wine",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "A world reference, with around 313,000 visitors a year. The interactive museum takes you from the Douro soil to the grapes and aromas, and the guided tour ends with a white and a tawny Port. Combine it with a fado show for the perfect ending.",
+      "address": "Avenida Diogo Leite 344, Vila Nova de Gaia",
+      "phone": "",
+      "website": "https://www.tour.calem.pt",
+      "lat": 41.13802,
+      "lng": -8.61098
+    },
+    {
+      "id": "sandeman",
+      "cat": "cellars",
+      "name": "Sandeman",
+      "tagline": "Since 1790",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "In an 1811 granite building facing the historic centre across the river. The museum tells the story of George Sandeman, a young Scot who started selling wine in London in 1790, through paintings, old bottles and more.",
+      "address": "Largo Miguel Bombarda 47, Vila Nova de Gaia",
+      "phone": "",
+      "lat": 41.13755,
+      "lng": -8.61246
+    },
+    {
+      "id": "wow",
+      "cat": "museums",
+      "name": "WOW, World of Wine",
+      "tagline": "Wine, cork and the story of Porto",
+      "photos": [],
+      "rating": null,
+      "visited": "",
+      "review": "Opened in 2020 in Gaia, WOW covers the history of Portuguese wine, the ritual of glasses and the cork industry, plus the city's story and the north's textile and fashion industries. Seven museum experiences, twelve restaurants and bars, a wine school, shops and a terrace with a great view of Porto.",
+      "address": "Rua do Choupelo 39, Vila Nova de Gaia",
+      "phone": "",
+      "website": "https://wow.pt",
+      "lat": 41.13474,
+      "lng": -8.61435
+    }
+  ],
+  "moreIdeas": [
+    {
+      "label": "Rota do Chá",
+      "note": "Tea house with a garden",
+      "url": "https://www.rotadocha.pt/"
+    },
+    {
+      "label": "Centro Comercial Bombarda",
+      "note": "Small shops and designers",
+      "url": "https://www.ccbombarda.pt/"
+    },
+    {
+      "label": "Copo d'Uva",
+      "note": "",
+      "url": "https://copoduva.com/"
+    },
+    {
+      "label": "Ó Galeria",
+      "note": "Illustration gallery",
+      "url": "https://ogaleria.com/"
+    },
+    {
+      "label": "Tilsitt Gallery",
+      "note": "Art gallery",
+      "url": "https://tilsittgallery.com/"
+    },
+    {
+      "label": "Galeria Fernando Santos",
+      "note": "Art gallery",
+      "url": "http://www.galeriafernandosantos.com/"
+    }
+  ]
+}

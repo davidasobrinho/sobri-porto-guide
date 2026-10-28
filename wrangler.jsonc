@@ -1,0 +1,9 @@
+// Cloudflare Worker that serves the guide as static files.
+// Cloudflare publishes it automatically on every push to main (Workers Builds).
+{
+  "name": "sobri-porto-guide",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./site"
+  }
+}
