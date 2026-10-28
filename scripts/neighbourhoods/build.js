@@ -34,7 +34,11 @@ const asFeature = (g, id) => turf.feature(g, { id });
   out.push(merged);
 
   const ced = await lookup(["R5936089"]);
-  out.push(asFeature(ced[0].geojson, "cedofeita"));
+  // Only the part south of the metro line (Trindade, Lapa, Carolina Michaëlis, Casa da Música stations)
+  const southOfMetro = turf.polygon([[[-8.645, 41.1603], [-8.6288, 41.1603], [-8.6219, 41.1586], [-8.6168, 41.1571], [-8.6093, 41.1523], [-8.600, 41.1515], [-8.600, 41.140], [-8.645, 41.140], [-8.645, 41.1603]]]);
+  const cedSouth = turf.intersect(turf.featureCollection([asFeature(ced[0].geojson, "cedofeita"), southOfMetro]));
+  cedSouth.properties = { id: "cedofeita" };
+  out.push(cedSouth);
 
   // Baixa (downtown: Aliados, Bolhão, Santa Catarina, Trindade) = the old parish of Santo Ildefonso
   const baixa = await lookup(["R5936095"]);
