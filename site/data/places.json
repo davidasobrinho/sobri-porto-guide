@@ -11,7 +11,6 @@
     "Everything in this space was chosen to feel natural and comfortable, combining cork with wood and steel. It is made in Portugal, and the whole atmosphere reflects what SOBRI stands for.",
     "Feel free to explore our home, and enjoy. Below are the places we love in Porto. If you want to know something specific, just ask us."
   ],
-  "signoff": "Cris & David",
   "links": [
     {
       "label": "sobri.pt",
@@ -20,6 +19,23 @@
     {
       "label": "Instagram",
       "url": "https://www.instagram.com/sobri.porto/"
+    }
+  ],
+  "whatsOn": [
+    {
+      "label": "Viral Agenda",
+      "note": "Concerts, clubs, theatre, this week",
+      "url": "https://www.viralagenda.com/pt/porto"
+    },
+    {
+      "label": "Agenda Porto",
+      "note": "The city's own events agenda",
+      "url": "https://www.agenda-porto.pt/en/"
+    },
+    {
+      "label": "Agenda Cultural do Porto",
+      "note": "Monthly English-friendly picks",
+      "url": "https://agendaculturalporto.org/porto-english-friendly-events-cultural-agenda/"
     }
   ],
   "sections": {

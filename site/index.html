@@ -24,8 +24,8 @@
   --cork: #C9A37C;          /* raw cork, the accent */
   --cork-soft: rgba(201, 163, 124, .14);
   --on-cork: #17140F;
-  --selected: #8A5A34;      /* dark cork brown for selected states: 5.1:1 with --on-selected, 3.1:1 against --bg */
-  --on-selected: #F7EFE6;
+  --selected: #6B6762;      /* warm grey for selected states: 5.0:1 with --on-selected, 3.2:1 against --bg */
+  --on-selected: #F4F1EC;
   --placeholder: #24221F;
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "Geist", "Segoe UI", system-ui, sans-serif;
@@ -141,8 +141,9 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 /* Welcome */
 .welcome h2 { font-size: 32px; font-weight: 800; letter-spacing: -.025em; line-height: 1.02; }
 .welcome p { max-width: 62ch; margin: 12px 0 0; color: #D9D4CC; }
-.sign { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-top: 16px; color: var(--cork); }
-.welcome .actions { margin-top: 22px; }
+.rule { width: 48px; height: 2px; margin: 24px 0 0; border: 0; border-radius: 2px; background: var(--line-strong); }
+.welcome .actions { margin-top: 20px; }
+.whats-on { margin-top: 30px; }
 .how { margin-top: 30px; display: grid; gap: 0; border-top: 1px solid var(--line); }
 .how div { display: grid; grid-template-columns: 34px 1fr; gap: 10px; color: var(--muted); font-size: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
 .how .k { font: 500 11px/1.9 var(--font-mono); color: var(--cork); }
@@ -444,9 +445,14 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
     view.innerHTML =
       '<div class="welcome"><h2>Welcome to Porto</h2>' +
       G.welcome.map(t => "<p>" + esc(t) + "</p>").join("") +
-      '<div class="sign">' + esc(G.signoff) + "</div>" +
-      '<div class="actions"><button class="btn primary" id="go-places">See the ' + places.filter(p => tabOf(p) === "places").length + ' places</button>' +
-      G.links.map(l => '<a class="btn" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a>").join("") + "</div>" +
+      '<hr class="rule">' +
+      '<div class="actions">' +
+      G.links.filter(l => l.label === "sobri.pt").map(l => '<a class="btn" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a>").join("") +
+      '<button class="btn primary" id="go-places">Places</button>' +
+      '<button class="btn" id="go-services">Services</button>' +
+      G.links.filter(l => l.label !== "sobri.pt").map(l => '<a class="btn" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a>").join("") + "</div>" +
+      (G.whatsOn && G.whatsOn.length ? '<div class="ideas whats-on"><div class="group-h">See what\'s happening</div><ul>' +
+        G.whatsOn.map(i => '<li><a href="' + esc(i.url) + '" target="_blank" rel="noopener">' + esc(i.label) + "<span>" + esc(i.note) + " ↗</span></a></li>").join("") + "</ul></div>" : "") +
       '<div class="how">' +
       '<div><span class="k">TAP</span><span><b>Tap a pin or a place</b> to read why we like it and see photos.</span></div>' +
       '<div><span class="k">FILTER</span><span><b>Filter</b> by what you feel like: bars and restaurants, culture, the outdoors.</span></div>' +
@@ -456,6 +462,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
         G.moreIdeas.map(i => '<li><a href="' + esc(i.url) + '" target="_blank" rel="noopener">' + esc(i.label) + "<span>" + esc(i.note) + "</span></a></li>").join("") + "</ul></div>" : "") +
       '<p class="foot">Times are walking estimates from the Cork House. Opening hours change, so check before you go.</p></div>';
     document.getElementById("go-places").onclick = () => setTab("places");
+    document.getElementById("go-services").onclick = () => setTab("services");
     scroller.scrollTop = 0;
   }
 
