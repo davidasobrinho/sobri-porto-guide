@@ -571,7 +571,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
       DATES.map(d => '<div class="date"><div class="date-d">' + esc(d.date) + "</div><h3>" + esc(d.name) + "</h3><p>" + esc(d.text) + "</p></div>").join("");
     if (state.sub === "dates") {
       body = datesHTML();
-    } else if (state.sort === "near") {
+    } else if (state.sort === "near" && !svc) {
       body = list.map(cardHTML).join("");
     } else if (state.sec === "all") {
       Object.keys(SECS).forEach(s => {
@@ -587,7 +587,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
       if (state.sec === "culture" && state.sub === "all" && DATES.length) body += datesHTML();
     }
     view.innerHTML = (svc ? "" : '<div class="filters" role="group" aria-label="Filter places">' + secChips.join("") + "</div>") + subRow +
-      (state.sub === "dates" ? "" : '<div class="sortrow"><span>' + (state.sort === "near" ? "Nearest to the Cork House first" : "In guide order") + '</span><button id="sort">' + (state.sort === "near" ? "Guide order" : "Nearest first") + "</button></div>") + body;
+      (state.sub === "dates" || svc ? "" : '<div class="sortrow"><span>' + (state.sort === "near" ? "Nearest to the Cork House first" : "In guide order") + '</span><button id="sort">' + (state.sort === "near" ? "Guide order" : "Nearest first") + "</button></div>") + body;
 
     view.querySelectorAll("[data-sec]").forEach(b => b.onclick = () => {
       state.sec = b.dataset.sec; state.sub = "all"; renderList(); refreshPins();
