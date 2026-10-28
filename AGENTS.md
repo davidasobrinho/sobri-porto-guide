@@ -21,7 +21,7 @@ Use the `porto-guide` preview in `.claude/launch.json`, or run `npx -y http-serv
 
 ## Publish
 
-Push to `main`. Cloudflare Workers Builds deploys `site/` to the Worker `sobri-porto-guide`. Live at https://sobri-porto-guide.david-asobrinho.workers.dev/.
+Push to `main`. Cloudflare Workers Builds deploys `site/` to the Worker `sobri-porto-guide`. Live at https://guide.sobri.pt/ (custom domain set in `wrangler.jsonc`). The old link https://sobri-porto-guide.david-asobrinho.workers.dev/ is kept working for guests who have it. sobri.pt's DNS is on Cloudflare: every other record (Substack, email) must stay "DNS only".
 
 ## Rules
 

@@ -3,6 +3,12 @@
 {
   "name": "sobri-porto-guide",
   "compatibility_date": "2026-10-01",
+  // Keep the old workers.dev link working for guests who already have it
+  "workers_dev": true,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "guide.sobri.pt", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./site"
   }

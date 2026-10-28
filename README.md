@@ -1,6 +1,6 @@
 # SOBRI Porto guide
 
-**Live:** https://sobri-porto-guide.david-asobrinho.workers.dev/
+**Live:** https://guide.sobri.pt/
 
 An interactive Porto city guide for guests of the SOBRI Cork House. It replaces the Word document we used to send before each stay with something guests can actually use on the street: a map, a list sorted by distance from the house, and our own photos and short reviews for each place.
 
