@@ -557,7 +557,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
         .map(s => chip("data-sec", s, SECS[s].label, secCount[s] || 0, state.sec === s, SECS[s].color)));
     // Row 2: sub-categories of the chosen section
     let subRow = "";
-    if (state.sec !== "all") {
+    if (state.sec !== "all" && !svc) { // Services is short enough to need no filters
       const subs = Object.values(SUB).filter(s => s.sec === state.sec && subCount[s.id]);
       const subChips = [chip("data-sub", "all", svc ? "All" : "All " + SECS[state.sec].label.toLowerCase(), svc ? inTab.length : null, state.sub === "all")]
         .concat(subs.map(s => chip("data-sub", s.id, s.label, subCount[s.id], state.sub === s.id)));
