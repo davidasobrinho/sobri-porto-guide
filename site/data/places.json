@@ -1049,12 +1049,11 @@
       "intro": "Colourful houses stacked above the Douro, terraces along the quay and the Dom Luís I bridge overhead. Busy with visitors, but at sunset it's hard to beat. Walk across the bridge to Gaia for the classic view back and the Port wine cellars."
     },
     {
-      "id": "trindade",
-      "name": "Trindade",
+      "id": "baixa",
+      "name": "Baixa",
       "color": "#C9A37C",
-      "approx": true,
-      "tagline": "Our neighbourhood, the city's crossroads",
-      "intro": "Where the house is. Trindade is Porto's main metro hub, so the airport, the beach and the rest of the city are one ride away. Avenida dos Aliados and the City Hall are around the corner, with cafés, bars and restaurants on every street."
+      "tagline": "Downtown: Aliados, Bolhão and Santa Catarina",
+      "intro": "Downtown Porto, where locals come to shop and meet. Avenida dos Aliados and the City Hall, the restored Bolhão market, the shopping street of Santa Catarina with the Majestic Café, and Trindade, the main metro hub. Lively by day, with cafés and bars on every corner."
     },
     {
       "id": "cedofeita",

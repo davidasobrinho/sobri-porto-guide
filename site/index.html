@@ -479,7 +479,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
         '<button class="hood-h" data-hood-go="' + h.id + '"><span class="sw"></span><span><h3>' + esc(h.name) + "</h3><p>" + esc(h.tagline) + "</p></span></button>" +
         '<p class="hood-t">' + esc(h.intro) + "</p>" +
         '<button class="btn m-only" data-hood-map="' + h.id + '">Show on map</button></article>').join("") +
-      '<p class="foot">Areas follow parish boundaries from OpenStreetMap. Trindade, Boavista and Antas have no official boundary, so their dashed outlines are approximate.</p></div>';
+      '<p class="foot">Areas follow parish boundaries from OpenStreetMap. Boavista and Antas have no official boundary, so their dashed outlines are approximate.</p></div>';
     view.querySelectorAll("[data-hood-go]").forEach(b => b.onclick = () => selectHood(b.dataset.hoodGo));
     view.querySelectorAll("[data-hood-map]").forEach(b => b.onclick = () => { setMode("map"); selectHood(b.dataset.hoodMap); });
     view.querySelectorAll(".hood").forEach(a => {

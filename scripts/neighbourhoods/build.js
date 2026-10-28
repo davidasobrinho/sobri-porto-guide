@@ -36,6 +36,10 @@ const asFeature = (g, id) => turf.feature(g, { id });
   const ced = await lookup(["R5936089"]);
   out.push(asFeature(ced[0].geojson, "cedofeita"));
 
+  // Baixa (downtown: Aliados, Bolhão, Santa Catarina, Trindade) = the old parish of Santo Ildefonso
+  const baixa = await lookup(["R5936095"]);
+  out.push(asFeature(baixa[0].geojson, "baixa"));
+
   const bonfim = await search("Bonfim, Porto", "boundary", "administrative");
   out.push(asFeature(bonfim.geojson, "bonfim"));
 
@@ -55,7 +59,6 @@ const asFeature = (g, id) => turf.feature(g, { id });
   const approx = (id, lng, lat, km) => turf.circle([lng, lat], km, { steps: 48, units: "kilometers", properties: { id, approx: true } });
   out.push(approx("antas", -8.5885, 41.1610, 0.75));
   out.push(approx("boavista", -8.6330, 41.1580, 0.7));
-  out.push(approx("trindade", -8.6093, 41.1518, 0.3));
 
   // Ribeira last, so it is drawn on top of the historic centre
   const rib = await lookup(["R19484850"]);
@@ -65,7 +68,7 @@ const asFeature = (g, id) => turf.feature(g, { id });
   const round = c => Array.isArray(c[0]) ? c.map(round) : [Math.round(c[0] * 1e5) / 1e5, Math.round(c[1] * 1e5) / 1e5];
   for (const f of out) f.geometry.coordinates = round(f.geometry.coordinates);
 
-  const fc = { type: "FeatureCollection", attribution: "Boundaries © OpenStreetMap contributors (ODbL). Antas is approximate.", features: out };
+  const fc = { type: "FeatureCollection", attribution: "Boundaries © OpenStreetMap contributors (ODbL). Antas and Boavista are approximate.", features: out };
   fs.writeFileSync(process.argv[2], JSON.stringify(fc));
   console.log(out.map(f => f.properties.id + ":" + f.geometry.type).join(" "), (fs.statSync(process.argv[2]).size / 1024).toFixed(0) + " KB");
 })();
