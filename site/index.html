@@ -195,6 +195,13 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .nav-row button:last-child { text-align: right; }
 .nav-row b { display: block; color: var(--fg); font: 600 15px var(--font-body); letter-spacing: 0; text-transform: none; margin-top: 3px; }
 
+/* Swipe between tabs: a short slide-in from the side the swipe came from */
+@keyframes in-l { from { opacity: .3; transform: translateX(28px); } }
+@keyframes in-r { from { opacity: .3; transform: translateX(-28px); } }
+.pad.in-l { animation: in-l .22s ease-out; }
+.pad.in-r { animation: in-r .22s ease-out; }
+@media (prefers-reduced-motion: reduce) { .pad.in-l, .pad.in-r { animation: none; } }
+
 /* Welcome */
 .welcome h2 { font-family: var(--font-body); font-size: 24px; font-weight: 700; letter-spacing: .01em; line-height: 1.1; text-transform: uppercase; }
 .welcome p { max-width: 62ch; margin: 12px 0 0; color: var(--text-2); }
@@ -738,6 +745,23 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   document.getElementById("tab-places").onclick = () => { setMode("list"); state.open = null; setTab("places"); };
   document.getElementById("tab-hoods").onclick = () => { setMode("list"); setTab("hoods"); };
   document.getElementById("tab-services").onclick = () => { setMode("list"); state.open = null; setTab("services"); };
+
+  // Swipe left or right on the list to move between tabs (not while reading a place, or in a sideways-scrolling strip)
+  let sw = null;
+  scroller.addEventListener("touchstart", e => {
+    if (e.touches.length !== 1 || state.open || e.target.closest(".gallery, .leaflet-container")) { sw = null; return; }
+    sw = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now() };
+  }, { passive: true });
+  scroller.addEventListener("touchend", e => {
+    if (!sw) return;
+    const dx = e.changedTouches[0].clientX - sw.x, dy = e.changedTouches[0].clientY - sw.y, dt = Date.now() - sw.t;
+    sw = null;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5 || dt > 700) return;
+    const next = TABS[TABS.indexOf(state.tab) + (dx < 0 ? 1 : -1)];
+    if (!next) return;
+    document.getElementById("tab-" + next).click();
+    view.classList.remove("in-l", "in-r"); void view.offsetWidth; view.classList.add(dx < 0 ? "in-l" : "in-r");
+  }, { passive: true });
 
   // ---------- Cork grain on the header ----------
   function grain() {
