@@ -6,7 +6,7 @@
 <title>SOBRI Porto Guide</title>
 <meta name="description" content="Where to eat, drink and wander in Porto, picked by the SOBRI Cork House.">
 <meta name="theme-color" content="#161718">
-<script>/* Apply the saved light/dark choice before the page draws, so it never flashes */ try { if (localStorage.getItem("sobri-theme") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}</script>
+<script>/* Apply the saved light/dark choice before the page draws, so it never flashes */ try { const t = localStorage.getItem("sobri-theme"); if (t === "light" || (!t && window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches)) document.documentElement.dataset.theme = "light"; } catch (e) {}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
@@ -43,33 +43,38 @@
   --font-body: "Geist", "Segoe UI", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   --panel-w: 440px;
-  --radius: 14px;
+  --radius: 8px;            /* SOBRI design system: one soft corner */
+  --btn-bg: #EDE9E3;        /* buttons: warm paper in dark, brown in light */
+  --btn-fg: #161718;
+  --font-logo: "Jost", "Futura", "Century Gothic", "Segoe UI", sans-serif;
   --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .79  0 0 0 0 .64  0 0 0 0 .49  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   color-scheme: dark;
 }
 
 :root[data-theme="light"] {
-  --bg: #F4F0E9;
-  --surface: #EBE5DB;
-  --surface-2: #E2DACD;
-  --line: rgba(40, 34, 28, .10);
-  --line-strong: rgba(40, 34, 28, .20);
-  --fg: #1F1C18;
-  --muted: #645E55;
-  --cork: #8A5A34;
-  --cork-soft: rgba(138, 90, 52, .12);
-  --on-cork: #FFF8F0;
-  --selected: #3B3732;
-  --on-selected: #F4F0E9;
-  --placeholder: #E2DACD;
-  --text-2: #3A362F;
-  --brand-bg: #E9E2D6;
-  --brand-fade: rgba(244,240,233,.85);
+  --bg: #FFFFFF;            /* SOBRI design system: white, as on sobri.pt */
+  --surface: #F6F4F2;
+  --surface-2: #EBE5DB;
+  --line: rgba(54, 55, 55, .12);
+  --line-strong: rgba(54, 55, 55, .24);
+  --fg: #363737;
+  --muted: #6E6A65;
+  --cork: #431407;          /* deep cork brown, the website's colour */
+  --cork-soft: rgba(67, 20, 7, .08);
+  --on-cork: #FFFFFF;
+  --selected: #363737;
+  --on-selected: #FFFFFF;
+  --placeholder: #EBE5DB;
+  --text-2: #4A4744;
+  --brand-bg: #F6F4F2;
+  --brand-fade: rgba(255,255,255,.85);
   --ring: #FFFFFF;
-  --glass: rgba(244,240,233,.86);
-  --glass-strong: rgba(244,240,233,.95);
-  --attr-bg: rgba(244,240,233,.8);
-  --primary-hover: #9C6A41;
+  --glass: rgba(255,255,255,.86);
+  --glass-strong: rgba(255,255,255,.95);
+  --attr-bg: rgba(255,255,255,.8);
+  --primary-hover: #5A1E0C;
+  --btn-bg: #431407;
+  --btn-fg: #FFFFFF;
   --label-fg: #1F1C18;
   --label-halo: 0 0 3px rgba(255,255,255,.95), 0 0 8px rgba(255,255,255,.85);
   --tiles: saturate(.55) sepia(.1) contrast(.94) brightness(1.02);
@@ -88,6 +93,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .app { display: grid; grid-template-columns: var(--panel-w) minmax(0, 1fr); height: 100%; overflow: hidden; overflow: clip; }
 .panel { position: relative; display: flex; flex-direction: column; min-width: 0; height: 100%; overflow: hidden; border-right: 1px solid var(--line); background: var(--bg); }
 .panel::before { content: ""; position: absolute; inset: 0; background: var(--grain); opacity: .05; pointer-events: none; }
+:root[data-theme="light"] .panel::before, :root[data-theme="light"] .brand canvas { opacity: 0; }
+:root[data-theme="light"] .dot, :root[data-theme="light"] .pin, :root[data-theme="light"] .hood .sw { background: color-mix(in oklab, var(--c, var(--cork)) 78%, black); }
 #map { height: 100%; background: var(--surface); }
 
 /* Header: graphite with cork grain drawn on canvas */
@@ -97,6 +104,10 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .brand-inner { position: relative; z-index: 1; padding: 20px max(20px, env(safe-area-inset-right, 0px)) 0 max(20px, env(safe-area-inset-left, 0px)); }
 .brand-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font: 500 11px/1.4 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .brand-top b { color: var(--cork); font-weight: 500; }
+/* The SOBRI logo (black on transparent): white in dark, as drawn in light */
+.logo-mark { display: inline-block; height: .72em; width: auto; vertical-align: baseline; filter: invert(1); }
+:root[data-theme="light"] .logo-mark { filter: none; }
+.brand h1 span .logo-mark { opacity: .7; height: .68em; }
 .brand h1 { font-size: 46px; line-height: .95; font-weight: 800; letter-spacing: -.025em; margin: 18px 0 6px; }
 .brand h1 span { display: block; font-weight: 400; font-size: 20px; letter-spacing: -.01em; color: var(--muted); margin-top: 8px; }
 .theme-btn { position: absolute; z-index: 2; top: 56px; right: max(20px, env(safe-area-inset-right, 0px)); width: 38px; height: 38px; padding: 0; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--glass); color: var(--fg); display: grid; place-items: center; transition: border-color .15s; }
@@ -127,7 +138,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .filters.sub .chip[aria-pressed="true"] { background: var(--surface-2); color: var(--fg); border-color: var(--selected); box-shadow: inset 0 0 0 1px var(--selected); }
 .date { padding: 14px 0; border-bottom: 1px solid var(--line); }
 .date-d { font: 500 11px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--cork); }
-.date h3 { font-size: 20px; font-weight: 700; margin-top: 4px; letter-spacing: -.01em; }
+.date h3 { font-family: var(--font-body); font-size: 16px; font-weight: 700; text-transform: uppercase; margin-top: 4px; letter-spacing: .02em; }
 .date p { margin: 4px 0 0; color: var(--text-2); max-width: 62ch; }
 .sortrow { display: flex; justify-content: space-between; align-items: center; margin: 16px 0 4px; font: 500 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .sortrow button { border: 0; background: none; color: var(--cork); padding: 4px 0; font: inherit; letter-spacing: inherit; text-transform: inherit; }
@@ -137,14 +148,14 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .group-h .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
 .group-h::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .group-intro { color: var(--muted); font-size: 14px; margin: 0 0 8px; }
-.card { display: grid; grid-template-columns: 72px 1fr; gap: 14px; align-items: center; width: 100%; text-align: left; border: 0; background: none; padding: 10px 8px; margin: 0 -8px; border-radius: 12px; transition: background .15s; }
+.card { display: grid; grid-template-columns: 72px 1fr; gap: 14px; align-items: center; width: 100%; text-align: left; border: 0; background: none; padding: 10px 8px; margin: 0 -8px; border-radius: var(--radius); transition: background .15s; }
 .card:hover, .card.hl { background: var(--surface); }
-.thumb { position: relative; width: 72px; height: 72px; border-radius: 10px; overflow: hidden; background: var(--placeholder); }
+.thumb { position: relative; width: 72px; height: 72px; border-radius: var(--radius); overflow: hidden; background: var(--placeholder); }
 .thumb::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
 .thumb.empty { background: var(--placeholder) var(--grain); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .card-t { min-width: 0; }
-.card-t h3 { font-size: 17px; font-weight: 600; line-height: 1.2; letter-spacing: -.005em; }
+.card-t h3 { font-family: var(--font-body); font-size: 15px; font-weight: 700; line-height: 1.25; letter-spacing: .02em; text-transform: uppercase; }
 .card-t p { margin: 2px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.35; }
 .card-t .meta, .peek .meta { display: flex; align-items: center; gap: 6px; font: 500 11px var(--font-mono); letter-spacing: .04em; text-transform: uppercase; margin-top: 6px; color: var(--muted); }
 .meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c); }
@@ -157,12 +168,12 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cover.empty { display: grid; place-items: center; color: var(--muted); font-size: 13px; aspect-ratio: 3 / 1; }
 .gallery { display: flex; gap: 8px; margin-top: 8px; overflow-x: auto; }
-.gallery button { flex: none; width: 64px; height: 64px; padding: 0; border: 2px solid transparent; border-radius: 9px; overflow: hidden; background: none; }
+.gallery button { flex: none; width: 64px; height: 64px; padding: 0; border: 2px solid transparent; border-radius: var(--radius); overflow: hidden; background: none; }
 .gallery button[aria-current="true"] { border-color: var(--selected); }
 .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .d-cat { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; font: 500 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .d-cat .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
-.detail h2 { font-size: 34px; line-height: 1.02; font-weight: 800; letter-spacing: -.025em; margin-top: 8px; }
+.detail h2 { font-family: var(--font-body); font-size: 26px; line-height: 1.1; font-weight: 700; letter-spacing: .01em; text-transform: uppercase; margin-top: 8px; }
 .detail .tagline { font-size: 17px; color: var(--muted); margin: 6px 0 0; }
 .stars { margin-top: 10px; color: var(--cork); letter-spacing: 2px; font-size: 17px; }
 .stars small { letter-spacing: .04em; color: var(--muted); font: 500 11px var(--font-mono); text-transform: uppercase; margin-left: 6px; }
@@ -175,9 +186,9 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
 .facts dd.mono { font-size: 13px; color: var(--muted); }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; text-decoration: none; font-weight: 500; font-size: 14px; border: 1px solid var(--line-strong); background: transparent; color: var(--fg); transition: border-color .15s, background .15s; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: var(--radius); text-decoration: none; font-weight: 500; font-size: 14px; border: 1px solid var(--line-strong); background: transparent; color: var(--fg); transition: border-color .15s, background .15s; }
 .btn:hover { border-color: var(--muted); }
-.btn.primary { background: var(--cork); color: var(--on-cork); border-color: var(--cork); font-weight: 600; }
+.btn.primary { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); font-weight: 600; }
 .btn.primary:hover { background: var(--primary-hover); }
 .nav-row { display: flex; justify-content: space-between; gap: 8px; margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); }
 .nav-row button { border: 0; background: none; color: var(--muted); font: 500 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 0; text-align: left; }
@@ -185,7 +196,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .nav-row b { display: block; color: var(--fg); font: 600 15px var(--font-body); letter-spacing: 0; text-transform: none; margin-top: 3px; }
 
 /* Welcome */
-.welcome h2 { font-size: 32px; font-weight: 800; letter-spacing: -.025em; line-height: 1.02; }
+.welcome h2 { font-family: var(--font-body); font-size: 24px; font-weight: 700; letter-spacing: .01em; line-height: 1.1; text-transform: uppercase; }
 .welcome p { max-width: 62ch; margin: 12px 0 0; color: var(--text-2); }
 .rule { width: 48px; height: 2px; margin: 24px 0 0; border: 0; border-radius: 2px; background: var(--line-strong); }
 .welcome .sec-h { margin: 34px 0 10px; font-size: 21px; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
@@ -212,9 +223,9 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 .foot { margin-top: 28px; font: 500 11px/1.6 var(--font-mono); letter-spacing: .03em; color: var(--muted); }
 
 /* Neighbourhoods */
-.hoods h2 { font-size: 32px; font-weight: 800; letter-spacing: -.025em; line-height: 1.02; }
+.hoods h2 { font-family: var(--font-body); font-size: 24px; font-weight: 700; letter-spacing: .01em; line-height: 1.1; text-transform: uppercase; }
 .hoods .lead { max-width: 62ch; margin: 12px 0 10px; color: var(--text-2); }
-.hood { padding: 14px 8px; margin: 0 -8px; border-bottom: 1px solid var(--line); border-radius: 12px; transition: background .15s; }
+.hood { padding: 14px 8px; margin: 0 -8px; border-bottom: 1px solid var(--line); border-radius: var(--radius); transition: background .15s; }
 .hood.hl { background: var(--surface); }
 .hood-h { display: flex; gap: 12px; align-items: center; width: 100%; border: 0; background: none; padding: 0; text-align: left; }
 .hood .sw { flex: none; width: 14px; height: 40px; border-radius: 4px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(255,255,255,.15); }
@@ -294,8 +305,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
     <header class="brand">
       <canvas id="grain" aria-hidden="true"></canvas>
       <div class="brand-inner">
-        <div class="brand-top"><span>SOBRI Cork House</span><span id="year"></span></div>
-        <h1>Porto <span>by SOBRI</span></h1>
+        <div class="brand-top"><span><img class="logo-mark" src="sobri.png" alt="SOBRI" width="569" height="117"> · Cork House</span><span id="year"></span></div>
+        <h1>Porto <span>by <img class="logo-mark" src="sobri.png" alt="SOBRI" width="569" height="117"></span></h1>
         <button class="theme-btn" id="theme-btn" aria-label="Switch to light mode" title="Light / dark"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></svg></button>
         <div class="tabs" role="tablist">
           <button class="tab" role="tab" id="tab-welcome" aria-selected="false">Welcome</button>
@@ -752,7 +763,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   function applyTheme(t) {
     if (t === "light") document.documentElement.dataset.theme = "light"; else delete document.documentElement.dataset.theme;
     themeBtn.setAttribute("aria-label", t === "light" ? "Switch to dark mode" : "Switch to light mode");
-    document.querySelector('meta[name="theme-color"]').setAttribute("content", t === "light" ? "#F4F0E9" : "#161718");
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", t === "light" ? "#FFFFFF" : "#161718");
     grain();
   }
   applyTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
