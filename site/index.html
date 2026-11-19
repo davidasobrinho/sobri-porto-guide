@@ -203,6 +203,8 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
 @media (prefers-reduced-motion: reduce) { .pad.in-l, .pad.in-r { animation: none; } }
 
 /* Welcome */
+.welcome .hero { margin: 16px 0 4px; max-width: 420px; border-radius: var(--radius); overflow: hidden; background: var(--placeholder); }
+.welcome .hero img { display: block; width: 100%; height: auto; }
 .welcome h2 { font-family: var(--font-body); font-size: 24px; font-weight: 700; letter-spacing: .01em; line-height: 1.1; text-transform: uppercase; }
 .welcome p { max-width: 62ch; margin: 12px 0 0; color: var(--text-2); }
 .rule { width: 48px; height: 2px; margin: 24px 0 0; border: 0; border-radius: 2px; background: var(--line-strong); }
@@ -520,6 +522,7 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   function renderWelcome() {
     view.innerHTML =
       '<div class="welcome"><h2>Welcome to Porto</h2>' +
+      '<figure class="hero"><img src="photos/cork-house.webp" width="721" height="1024" alt="The green front door of the SOBRI Cork House, between blue and white tiles"></figure>' +
       G.welcome.map(t => "<p>" + esc(t) + "</p>").join("") +
       '<hr class="rule">' +
       // How to use this guide
